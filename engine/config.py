@@ -49,8 +49,8 @@ DEFAULT_CONFIG = {
         "minimal": ["performance_metrics", "monitoring_plan"],
     },
     "committee_tiers": ["high", "prohibited"],
-    "max_followup_rounds": 4,
-    "questions_per_round": 4,
+    "max_followup_rounds": 6,
+    "questions_per_round": 5,
 }
 
 

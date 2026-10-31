@@ -46,6 +46,20 @@ class DecisionIn(BaseModel):
     note: str = ""
 
 
+def _dev_llm(state):
+    """DEV ONLY (DEV_MOCK_LLM=1): offline stand-in that recognises a synthetic sample
+    brief and answers like the oracle. Never enabled on Vercel."""
+    if os.environ.get("DEV_MOCK_LLM") != "1":
+        return None
+    import json as _json
+
+    from eval.oracle import make_oracle_llm
+    txt = " ".join(t["text"] for t in (state or {}).get("turns", []) if t["role"] == "user")
+    cases = _json.loads((Path(__file__).resolve().parent.parent / "data/synthetic/gold_cases.json").read_text())
+    best = max(cases, key=lambda c: sum(1 for v in c["facts"].values() if v and v in txt) + (5 if c["brief"][:80] in txt else 0))
+    return make_oracle_llm(best)
+
+
 def _config(client_cfg):
     stored = store.get_config()
     return merge_config(stored if stored else client_cfg)
@@ -64,7 +78,8 @@ def session():
 @app.post("/api/turn")
 def turn(body: TurnIn):
     state = body.state or new_state()
-    agent = Agent(_config(body.config))
+    probe = {"turns": state.get("turns", []) + [{"role": "user", "text": body.message}]}
+    agent = Agent(_config(body.config), llm=_dev_llm(probe))
     try:
         out = agent.handle(state, body.message)
     except LLMError as e:
@@ -75,7 +90,7 @@ def turn(body: TurnIn):
 
 @app.post("/api/finalize")
 def finalize(body: FinalizeIn):
-    agent = Agent(_config(body.config))
+    agent = Agent(_config(body.config), llm=_dev_llm(body.state))
     inv = store.list_inventory() if store.persistent() else (body.inventory or store.seed_inventory())
     reg = agent.finalize(body.state, inv)
     reg["markdown"] = card_markdown(reg)
@@ -139,3 +154,8 @@ def frameworks():
 @app.exception_handler(Exception)
 def unhandled(_req, exc):
     return JSONResponse(status_code=500, content={"detail": f"Server error: {type(exc).__name__}: {str(exc)[:200]}"})
+
+
+if os.environ.get("SERVE_STATIC") == "1":  # local development only; Vercel serves public/ itself
+    from fastapi.staticfiles import StaticFiles
+    app.mount("/", StaticFiles(directory=str(Path(__file__).resolve().parent.parent / "public"), html=True), name="static")

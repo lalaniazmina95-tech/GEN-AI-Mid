@@ -1,0 +1,61 @@
+{
+ "n_cases": 63,
+ "n_completed": 63,
+ "errors": [],
+ "tier_agreement_pct": 100.0,
+ "tier_kappa": 1.0,
+ "eu_tier_agreement_pct": 100.0,
+ "eu_tier_kappa": 1.0,
+ "under_tiering_rate_pct": 0.0,
+ "under_tiering_high_prohibited": "0/29",
+ "under_tiered_cases": [],
+ "adversarial_under_tiered": "0/8",
+ "over_tiering_rate_pct": 0.0,
+ "over_tiered_cases": [],
+ "gap_detection_recall_pct": 99.4,
+ "seeded_gaps": "165/166",
+ "redundant_question_rate_pct": 7.2,
+ "questions": "41/567",
+ "affected_party_recall_pct": 52.1,
+ "affected_party_precision_pct": 91.0,
+ "card_faithfulness_pct": 100.0,
+ "card_statements": 1983,
+ "card_fabrication_rate_pct": 0.0,
+ "card_fabrications": 0,
+ "fabrication_detail": [],
+ "facts_dropped_by_quote_check": 0,
+ "turns_median": 3,
+ "turns_max": 7,
+ "confusion": {
+  "minimal": {
+   "minimal": 19,
+   "limited": 0,
+   "high": 0,
+   "prohibited": 0
+  },
+  "limited": {
+   "minimal": 0,
+   "limited": 15,
+   "high": 0,
+   "prohibited": 0
+  },
+  "high": {
+   "minimal": 0,
+   "limited": 0,
+   "high": 21,
+   "prohibited": 0
+  },
+  "prohibited": {
+   "minimal": 0,
+   "limited": 0,
+   "high": 0,
+   "prohibited": 8
+  }
+ },
+ "tokens_per_registration_mean": 0,
+ "cost_per_registration_usd_mean": 0.0,
+ "llm_calls_per_registration_mean": 0,
+ "total_tokens": 0,
+ "total_cost_usd": 0.0,
+ "latency_s_per_registration_mean": 0.0
+}

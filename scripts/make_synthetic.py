@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from archetypes import A  # noqa: E402
+from archetypes_holdout import H  # noqa: E402
 from engine.gaps import required_fields  # noqa: E402
 from engine.kb.schema import FIELD_BY_ID, FIELDS  # noqa: E402
 
@@ -68,9 +69,9 @@ def build_brief(intro, facts, fields):
     return intro + " " + " ".join(sents)
 
 
-def main():
+def build(archs):
     cases = []
-    for a in A:
+    for a in archs:
         facts = full_facts(a)
         g = a["gold"]
         flags = gold_flags(g)
@@ -99,16 +100,25 @@ def main():
                 "gold": {"tier": g["tier"], "eu_tier": g["eu_tier"], "codes": g["codes"], "affected": g["affected"],
                          "required_fields": req, "absent_controls": absent_controls, "rationale": a["rationale"], "flags": g["flags"]},
             })
+    return cases
+
+
+def main():
+    cases = build(A)
+    holdout = build(H)
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "gold_cases.json").write_text(json.dumps(cases, indent=1, ensure_ascii=False))
+    (OUT / "holdout_cases.json").write_text(json.dumps(holdout, indent=1, ensure_ascii=False))
+    cases_all = cases + holdout
     with open(OUT / "gold_cases.csv", "w", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(["id", "title", "variant", "gold_tier", "gold_eu_tier", "codes", "gold_affected", "seeded_gaps", "rationale", "reviewer_2_tier", "reviewer_2_note"])
-        for c in cases:
+        for c in cases_all:
             g = c["gold"]
             w.writerow([c["id"], c["title"], c["variant"], g["tier"], g["eu_tier"], ";".join(g["codes"]), ";".join(g["affected"]), ";".join(c["seeded_gaps"]), g["rationale"], "", ""])
     (OUT / "pii_cases.json").write_text(json.dumps(PII_CASES, indent=1))
     from collections import Counter
+    print(len(holdout), "holdout cases", Counter(c["gold"]["tier"] for c in holdout))
     print(len(cases), "cases", Counter(c["gold"]["tier"] for c in cases), Counter(c["variant"] for c in cases))
     print(len(PII_CASES), "pii cases")
 

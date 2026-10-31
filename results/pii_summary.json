@@ -1,0 +1,9 @@
+{
+ "n": 24,
+ "recall_pct": 100.0,
+ "precision_pct": 100.0,
+ "false_blocks": 0,
+ "missed": 0,
+ "tp": 12,
+ "tn": 12
+}

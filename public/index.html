@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Use Case Registry</title>
+<meta name="description" content="Register an AI use case, get follow-up questions from the EU AI Act, NIST AI RMF and AIGP, and receive a risk tier, affected parties, model card and system card for the AI inventory. Synthetic demo.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231f5f8b'/><path d='M9 22V10h5a4 4 0 010 8H9m7 0l5 4' stroke='white' stroke-width='2.6' fill='none' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="logo" aria-hidden="true">R</div>
+    <div>
+      <div class="title">AI Use Case Registry</div>
+      <div class="sub">The Bank &middot; AI governance office &middot; <b>synthetic demo</b></div>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button data-tab="register" class="active">Register</button>
+    <button data-tab="inventory">Inventory</button>
+    <button data-tab="admin">Admin</button>
+    <button data-tab="frameworks">Frameworks</button>
+    <button data-tab="about">How it works</button>
+  </nav>
+  <label class="role">Viewing as
+    <select id="role">
+      <option value="team">Team member</option>
+      <option value="office">AI governance office</option>
+      <option value="committee">AI governance committee</option>
+      <option value="admin">Administrator</option>
+    </select>
+  </label>
+</header>
+
+<div class="banner" id="banner">
+  <b>You are interacting with an AI system</b> (EU AI Act Art. 50(1)). This demo runs on synthetic data only. Do not enter real customer data: messages with CNIC, account, card or phone numbers are blocked before they reach the model.
+  <span id="status-pill" class="pill">checking&hellip;</span>
+</div>
+
+<main>
+<!-- REGISTER -->
+<section id="tab-register" class="tab active">
+  <div class="reg-grid">
+    <div class="chat card">
+      <div class="chat-head">
+        <div><b id="reg-id">New registration</b> <span class="muted" id="reg-phase"></span></div>
+        <div class="row gap">
+          <select id="sample" aria-label="Load a synthetic sample brief"><option value="">Load a synthetic sample brief&hellip;</option></select>
+          <button class="ghost" id="new-session">New</button>
+        </div>
+      </div>
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <form id="composer" class="composer">
+        <textarea id="input" rows="3" placeholder="Paste your use case brief, or answer the questions above. Type &quot;finish&quot; to generate the assessment with what you have given."></textarea>
+        <div class="composer-row">
+          <label class="file ghost" title="Attach a .txt or .md document (no datasets)">Attach doc<input type="file" id="file" accept=".txt,.md,text/plain,text/markdown" hidden></label>
+          <span class="muted small" id="usage-line"></span>
+          <button type="button" class="ghost" id="finish-btn">Finish &amp; assess</button>
+          <button type="submit" id="send">Send</button>
+        </div>
+      </form>
+    </div>
+    <aside class="side">
+      <div class="card">
+        <h3>Live registration</h3>
+        <div class="kv"><span>Provisional tier floor</span><span id="floor" class="tier tier-none">&ndash;</span></div>
+        <div class="kv"><span>Required facts captured</span><span id="req-count">0 / 0</span></div>
+        <div id="fw-bars"></div>
+        <details><summary>Still missing</summary><ul id="missing" class="small"></ul></details>
+        <p class="muted small">The floor comes from hard rules and can only go up. The final tier is set after screening.</p>
+      </div>
+      <div class="card">
+        <h3>Captured facts</h3>
+        <ul id="facts" class="facts small"></ul>
+      </div>
+    </aside>
+  </div>
+  <div id="result" class="card result hidden"></div>
+</section>
+
+<!-- INVENTORY -->
+<section id="tab-inventory" class="tab">
+  <div class="kpis" id="kpis"></div>
+  <div class="card">
+    <div class="row between wrap">
+      <h3>AI inventory</h3>
+      <div class="row gap wrap">
+        <select id="f-tier"><option value="">All tiers</option><option>prohibited</option><option>high</option><option>limited</option><option>minimal</option></select>
+        <select id="f-status"><option value="">All statuses</option><option value="pending_approval">Pending approval</option><option value="pending_committee">Pending committee</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="returned_to_team">Returned to team</option></select>
+        <input id="f-q" placeholder="Search" aria-label="Search inventory">
+      </div>
+    </div>
+    <div class="table-wrap"><table class="inv"><thead><tr><th>ID</th><th>System</th><th>Domain</th><th>Bank tier</th><th>EU tier</th><th>Risk score</th><th>Status</th><th>Submitted</th></tr></thead><tbody id="inv-body"></tbody></table></div>
+    <p class="muted small" id="inv-note"></p>
+  </div>
+  <div id="inv-detail" class="card result hidden"></div>
+</section>
+
+<!-- ADMIN -->
+<section id="tab-admin" class="tab">
+  <div class="card">
+    <div class="row between wrap"><h3>Risk appetite and tiering rules</h3><span class="muted small" id="admin-note"></span></div>
+    <p class="muted small">Set by the Head of AI Risk Governance in line with the Board-approved risk appetite statement. The chatbot reads these settings and cannot change them; a conversation can never lower a minimum-tier rule.</p>
+    <div id="admin-form"></div>
+    <div class="row gap"><button id="save-cfg">Save configuration</button><button class="ghost" id="reset-cfg">Reset to defaults</button></div>
+  </div>
+</section>
+
+<!-- FRAMEWORKS -->
+<section id="tab-frameworks" class="tab">
+  <div class="card">
+    <h3>What the chatbot checks against</h3>
+    <p class="muted small">Every follow-up question is a field in the question bank, and every field is mapped to the clauses that require it. Clause texts are condensed paraphrases for this tool; check the official texts before relying on them.</p>
+    <div class="subtabs" id="fw-subtabs">
+      <button data-fw="bank" class="active">Question bank</button><button data-fw="eu">EU AI Act</button><button data-fw="nist">NIST AI RMF</button><button data-fw="aigp">AIGP</button>
+    </div>
+    <div id="fw-body"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="tab-about" class="tab">
+  <div class="card prose" id="about"></div>
+</section>
+</main>
+
+<footer class="foot muted small">DATA722 Phase 2 &middot; Use case C &middot; Synthetic data only &middot; Model: OpenAI gpt-oss (open-weight) on Groq &middot; Drafts are never official until approved by the AI governance office or committee.</footer>
+
+<div id="toast" class="toast hidden" role="status"></div>
+<script src="/app.js"></script>
+</body>
+</html>
