@@ -1,0 +1,18 @@
+model: openai/gpt-oss-20b
+pii: {'n': 24, 'recall_pct': 100.0, 'precision_pct': 100.0, 'false_blocks': 0, 'missed': 0, 'tp': 12, 'tn': 12}
+[baseline_20b_all] P1-S   gold=prohibited got=high
+[baseline_20b_all] P1-A   gold=prohibited got=high
+[baseline_20b_all] P2-C   gold=prohibited got=high
+[baseline_20b_all] P2-A   gold=prohibited got=high
+[baseline_20b_all] P3-S   gold=prohibited got=high
+[baseline_20b_all] P4-S   gold=prohibited got=high
+[baseline_20b_all] P4-A   gold=prohibited got=high
+[baseline_20b_all] P5-C   gold=prohibited got=high
+[baseline_20b_all] H1-C   gold=high       got=high
+[baseline_20b_all] H1-S   gold=high       got=high
+[baseline_20b_all] H1-A   gold=high       got=high
+[baseline_20b_all] H2-S   gold=high       got=minimal
+[baseline_20b_all] H2-A   gold=high       got=high
+[baseline_20b_all] H3-C   gold=high       got=high
+[baseline_20b_all] H3-S   gold=high       got=high
+[baseline_20b_all] H4-S   gold=high       got=high

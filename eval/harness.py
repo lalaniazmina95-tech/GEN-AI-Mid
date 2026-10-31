@@ -22,7 +22,7 @@ from pathlib import Path
 from engine.agent import Agent, new_state, team_text
 from engine.config import TIER_RANK
 from engine.kb.schema import FIELD_BY_ID
-from engine.llm import Usage
+from engine.llm import DailyLimit, Usage
 from engine.verify import quote_supported
 
 from .simulator import TeamSimulator
@@ -52,6 +52,8 @@ def run_case(case: dict, config: dict | None = None, llm=None, max_turns: int = 
             else:
                 break
         reg = agent.finalize(state, inventory=[])
+    except DailyLimit:
+        raise
     except Exception as e:  # noqa: BLE001 - record and continue the batch
         error = f"{type(e).__name__}: {e}"
         reg = None

@@ -51,6 +51,7 @@ DEFAULT_CONFIG = {
     "committee_tiers": ["high", "prohibited"],
     "max_followup_rounds": 6,
     "questions_per_round": 5,
+    "llm_question_wording": False,
 }
 
 

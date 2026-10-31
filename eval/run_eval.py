@@ -122,15 +122,26 @@ def main():
     ap.add_argument("--oracle", action="store_true")
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--limit", type=int)
+    ap.add_argument("--cases", help="comma-separated case ids (subset run)")
+    ap.add_argument("--tag", help="results tag for a subset run")
     a = ap.parse_args()
     print("model:", MODEL)
     print("pii:", pii_eval())
     if a.oracle or a.all:
         for name in ("gold", "holdout"):
             print(f"oracle {name}:", json.dumps({k: v for k, v in run_set(name, load(name), f"oracle_{name}", make_oracle_llm).items() if k in ("tier_agreement_pct", "under_tiered_cases", "over_tiered_cases")}))
-    if a.baseline or a.all:
+    if (a.baseline or a.all) and not a.cases:
         print("baseline dev:", run_baseline(load("gold"), "baseline_dev"))
         print("baseline holdout:", run_baseline(load("holdout"), "baseline_holdout"))
+    if a.cases:
+        ids = a.cases.split(",")
+        pool = {c["id"]: c for c in load("gold") + load("holdout")}
+        subset = [pool[i] for i in ids]
+        if a.baseline:
+            print("baseline subset:", run_baseline(subset, a.tag))
+        else:
+            print("subset:", json.dumps(run_set("subset", subset, a.tag), indent=1))
+        return
     if a.set == "dev" or a.all:
         print("system dev:", json.dumps(run_set("gold", load("gold"), "system_dev", limit=a.limit), indent=1))
     if a.set == "holdout" or a.all:

@@ -122,12 +122,16 @@ class Agent:
 
     def ask(self, state, gaps):
         items = [{"id": g, "question": FIELD_BY_ID[g]["question"], "reason": reason_for(g)} for g in gaps]
-        try:
-            out = self.llm(ASK_SYSTEM, ask_user(self.summary_line(state), items), "ask", "low", 1200)
-            qs = {q.get("id"): q.get("text") for q in out.get("questions", []) if q.get("id") in gaps and q.get("text")}
-            intro = out.get("intro") or "Thanks, I have captured that."
-        except (LLMError, ValueError, KeyError):
-            qs, intro = {}, "Thanks, I have captured that."
+        n = len(state["fields"])
+        qs, intro = {}, f"Thanks. I have recorded {n} fact{'s' if n != 1 else ''} so far. To complete the registration I need the following."
+        if self.cfg.get("llm_question_wording"):
+            # optional: model rewords the selected questions (off by default to save tokens on the free tier)
+            try:
+                out = self.llm(ASK_SYSTEM, ask_user(self.summary_line(state), items), "ask", "low", 1200)
+                qs = {q.get("id"): q.get("text") for q in out.get("questions", []) if q.get("id") in gaps and q.get("text")}
+                intro = out.get("intro") or intro
+            except (LLMError, ValueError, KeyError):
+                pass
         asked = [{"id": g, "text": qs.get(g) or f"{FIELD_BY_ID[g]['question']} ({reason_for(g)})"} for g in gaps]
         text = intro + "\n\n" + "\n".join(f"{i + 1}. {q['text']}" for i, q in enumerate(asked))
         text += "\n\nIf you do not know an answer, just say so and I will record it as an open item. Type \"finish\" at any time to generate the assessment with what you have given."

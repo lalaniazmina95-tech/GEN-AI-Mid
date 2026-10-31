@@ -20,6 +20,10 @@ class LLMError(RuntimeError):
     pass
 
 
+class DailyLimit(LLMError):
+    """Free-tier daily token/request cap: retrying will not help until it resets."""
+
+
 class Usage:
     """Accumulates usage across calls (one per registration session or eval run)."""
 
@@ -90,6 +94,8 @@ def chat_json(system: str, user: str, *, step: str, usage: Usage | None = None, 
                 last_err = str(e)
                 time.sleep(min(2 ** attempt, 4))
                 continue
+            if r.status_code == 429 and ("per day" in r.text or "TPD" in r.text or "RPD" in r.text):
+                raise DailyLimit(f"Groq daily limit reached for {model}: {r.text[:200]}")
             if r.status_code == 429:
                 wait = float(r.headers.get("retry-after", 2 ** attempt))
                 time.sleep(min(wait, max_wait) + 0.5)

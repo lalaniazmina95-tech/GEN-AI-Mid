@@ -268,7 +268,7 @@ function renderAdmin() {
     <div class="form-row"><div><b>Minimum-tier rules</b><div class="muted small">Hard floors the conversation cannot lower.</div></div><div>${Object.entries(c.min_tier_rules).map(([k, r]) => `<label class="row gap small" style="margin:4px 0"><input type="checkbox" data-rule="${esc(k)}" ${r.enabled ? "checked" : ""} ${dis}> ${tierBadge(r.tier)} ${esc(r.label)}</label>`).join("")}</div></div>
     <div class="form-row"><label><b>Allow Art. 6(3) derogation</b><div class="muted small">If on, an Annex III use case can drop out of high risk when the model finds a derogation and no profiling. Bank rules still apply.</div></label><div><input type="checkbox" id="derog" ${c.allow_art6_3_derogation ? "checked" : ""} ${dis}></div></div>
     <div class="form-row"><label for="bp"><b>Bank prohibited uses</b><div class="muted small">One per line. A match makes the use case prohibited at the Bank.</div></label><textarea id="bp" rows="4" ${dis}>${esc(c.bank_prohibited_uses.join("\n"))}</textarea></div>
-    <div class="form-row"><div><b>Conversation limits</b></div><div class="row gap wrap small"><label>Max follow-up rounds <input type="number" id="rounds" min="1" max="8" value="${c.max_followup_rounds}" ${dis} style="width:70px"></label><label>Questions per round <input type="number" id="qpr" min="1" max="8" value="${c.questions_per_round}" ${dis} style="width:70px"></label></div></div>
+    <div class="form-row"><div><b>Conversation limits</b></div><div class="row gap wrap small"><label>Max follow-up rounds <input type="number" id="rounds" min="1" max="8" value="${c.max_followup_rounds}" ${dis} style="width:70px"></label><label>Questions per round <input type="number" id="qpr" min="1" max="8" value="${c.questions_per_round}" ${dis} style="width:70px"></label><label class="row gap"><input type="checkbox" id="llmq" ${c.llm_question_wording ? "checked" : ""} ${dis}> Let the model reword follow-up questions (more tokens; off by default on the free tier)</label></div></div>
     <div class="sec"><h4>Mandatory controls per tier</h4><div class="ctrl-grid"><table><thead><tr><th>Control</th>${["minimal", "limited", "high"].map((t) => `<th>${tierBadge(t)}</th>`).join("")}</tr></thead><tbody>${ctrlFields.map((f) => `<tr><td>${esc(f.label)}</td>${["minimal", "limited", "high"].map((t) => `<td><input type="checkbox" data-mc="${t}:${esc(f.id)}" ${c.mandatory_controls[t].includes(f.id) ? "checked" : ""} ${dis}></td>`).join("")}</tr>`).join("")}</tbody></table></div></div>`;
   $("#thr").addEventListener("input", (e) => { $("#thr-v").textContent = e.target.value; });
   $("#save-cfg").disabled = !editable; $("#reset-cfg").disabled = !editable;
@@ -280,7 +280,7 @@ function readAdmin() {
   $$("[data-rule]").forEach((i) => { c.min_tier_rules[i.dataset.rule].enabled = i.checked; });
   c.allow_art6_3_derogation = $("#derog").checked;
   c.bank_prohibited_uses = $("#bp").value.split("\n").map((s) => s.trim()).filter(Boolean);
-  c.max_followup_rounds = Number($("#rounds").value); c.questions_per_round = Number($("#qpr").value);
+  c.max_followup_rounds = Number($("#rounds").value); c.questions_per_round = Number($("#qpr").value); c.llm_question_wording = $("#llmq").checked;
   for (const t of ["minimal", "limited", "high"]) c.mandatory_controls[t] = $$(`[data-mc^="${t}:"]`).filter((i) => i.checked).map((i) => i.dataset.mc.split(":")[1]);
   return c;
 }
