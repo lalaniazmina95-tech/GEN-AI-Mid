@@ -1,6 +1,6 @@
 # Video script: AI Use Case Registry (DATA722 Phase 2, use case C)
 
-**Length: about 4 min 40 s (ceiling is 5:00).** Tools: record the screen in Clipchamp or Canva; generate the voiceover from the narration below in ElevenLabs (paste each block as one generation, about 150 words a minute), or read it yourself. Footage: `docs/video_footage/` (screen recordings of the live app) plus screenshots of the notebook.
+**Length: about 4 min 40 s (ceiling is 5:00).** Tools: record the screen in Clipchamp or Canva; generate the voiceover from the narration below in ElevenLabs (paste each block as one generation, about 150 words a minute), or read it yourself. Footage: `docs/video_footage/live_demo_walkthrough.mp4` is a 69-second recording of the live app doing a full registration, cards, approval, the admin console and the personal-data block. Use it as B-roll or as a fallback, but record your own live demo, since the brief asks for a live demo.
 
 Before recording: open the live app in a fresh browser window, Register tab, "Viewing as: Team member". Open the notebook at section 6 in a second tab.
 
@@ -21,7 +21,7 @@ Before recording: open the live app in a fresh browser window, Register tab, "Vi
    > This team describes its credit model as a small helper tool for officers. That is exactly the understatement Phase 1 warned about.
 2. (0:55) The assistant replies with five numbered questions, each with its legal reason (EU AI Act, NIST, AIGP). Point at the right panel: the provisional tier floor, the framework bars filling up, the missing list.
    > It asks only about what is missing, and each question cites the clause that needs it. On the right, the framework coverage fills up as we answer.
-3. (1:10) Paste the prepared answers (from `docs/demo_answers.md`), Send, and repeat for two or three rounds; then type **finish**.
+3. (1:10) Answer the numbered questions using the lookup table in `docs/demo_answers.md` (copy the matching lines, keep the numbering), Send, do a second round, then type **finish**.
 4. (1:35) The result appears. Show the **Risk tier assessment**: Bank tier High, EU AI Act Annex III 5(b), the team's own words as evidence, the risk score against appetite, mandatory controls.
    > Despite the framing, it is high risk: the system evaluates the creditworthiness of individuals. A hard rule sets that floor and the conversation cannot lower it.
 5. (1:50) Click **Who is affected**, then **Model card** (point at a quoted source line and a red "Not provided"), then **System card**, then **Framework gap map**.

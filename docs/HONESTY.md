@@ -17,6 +17,8 @@ All figures come from the runs recorded in the notebook (section 6). The full-sy
 
 There are two reasons. First, the model fills a missing field by inferring it from a neighbouring sentence instead of asking. Second, it does not read facts stated indirectly in understated briefs ("nobody outside the unit sees it"), so it asks again.
 
+**It loses facts from long messages.** In a live test on the hosted app, one pasted message containing 28 facts yielded only about 17 extracted fields. The chatbot then asks again for the rest, which feeds the redundant-question rate, or lists them as open items if the team types "finish". Teams get better results answering the numbered questions than pasting everything at once.
+
 **It can soften a weak control.** In one case the model recorded "human oversight: in place" from a sentence about *weekly monitoring of freezes*, although the team had said nobody reviews an account before it is frozen. My fabrication metric did not catch this: it only flags controls the team never mentioned. A reviewer reading the quoted source would catch it, but only if they read it.
 
 **Its one-paragraph summaries embellish.** A judge model flagged unsupported claims in 4 of 12 AI-drafted system summaries. Some flags are the judge's own errors, but at least one is a real addition: an internal coding tool was said to "not retain code", which the team never said. The summary is labelled as AI-drafted, and all other card entries are quoted facts, but a reviewer must not rely on the summary.
