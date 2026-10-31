@@ -318,6 +318,17 @@ md("""
 ## 6. Evaluation: the Phase 1 metrics against the built system
 
 Each case is run end to end through the real system (guard, extraction, gap logic, questions, simulated team answers, screening, tiering, scoring, cards). Nothing in the loop knows the gold labels. The metrics and targets are the ones fixed in Phase 1 rows 7 and 7a.
+
+**What was run, and why not everything.** The project runs on Groq's free tier, which caps each model at 8,000 tokens a minute and a daily token allowance. One full registration costs about 19,500 tokens, so the free allowance covers only a handful of full registrations per model per day, and some of it must stay free for the hosted demo. I therefore ran:
+
+| Run | Cases | What it measures |
+|---|---|---|
+| Rules only (oracle extraction, no model) | all 63 dev + 14 held-out | the deterministic tiering, gap logic and question budget at full scale |
+| v1 baseline, gpt-oss-20b | all 77 | one-prompt, model-only tiering (section 5.1) |
+| Full system, **gpt-oss-120b** (the deployed model) | 6, chosen in advance: 4 understated (adversarial) briefs incl. 1 held-out, 1 held-out seeded, 1 complete | under-tiering on the hardest cases, end-to-end metrics |
+| Full system, gpt-oss-20b | 6 other cases, chosen in advance: 3 adversarial, 1 dev seeded, 2 held-out seeded | the same, on a second model with its own free allowance |
+
+The subsets were chosen before running, weighted towards the cases Phase 1 says matter most (understated briefs for under-tiering). Twelve full registrations is a small sample: a single case moves a percentage by 8 to 17 points, so the full-system numbers are indicative, not conclusive. The complete run is one command (`python -m eval.run_eval --all`) and costs about US$0.50 on Groq's paid tier.
 """)
 
 code("""
@@ -325,7 +336,7 @@ from eval.harness import score
 RUN = bool(os.environ.get("RUN_EVAL"))  # set RUN_EVAL=1 to re-run instead of loading cached results
 if RUN:
     import subprocess; subprocess.run([sys.executable, "-m", "eval.run_eval", "--all"], check=True)
-S = {t: load_summary(t) for t in ("system_dev", "system_holdout", "oracle_gold", "oracle_holdout")}
+S = {t: load_summary(t) for t in ("system_120b", "system_20b", "oracle_gold", "oracle_holdout")}
 targets = [
     ("Tier agreement (Bank tier) %", "tier_agreement_pct", ">= 90"),
     ("Cohen's kappa (Bank tier)", "tier_kappa", "report"),
@@ -346,15 +357,15 @@ targets = [
     ("Cost per registration (USD)", "cost_per_registration_usd_mean", "report"),
 ]
 def cell(s, k): return None if not s else s.get(k)
-tbl = pd.DataFrame([{"metric": n, "Phase 1 target": t, "system: dev (63)": cell(S["system_dev"], k), "system: held-out (14)": cell(S["system_holdout"], k),
-                     "rules only (oracle): dev": cell(S["oracle_gold"], k), "rules only (oracle): held-out": cell(S["oracle_holdout"], k)} for n, k, t in targets])
+tbl = pd.DataFrame([{"metric": n, "Phase 1 target": t, "full system, gpt-oss-120b (6 cases)": cell(S["system_120b"], k), "full system, gpt-oss-20b (6 cases)": cell(S["system_20b"], k),
+                     "rules only (oracle), dev (63)": cell(S["oracle_gold"], k), "rules only (oracle), held-out (14)": cell(S["oracle_holdout"], k)} for n, k, t in targets])
 display(tbl)
 """)
 
 code("""
 TIERS = ["minimal", "limited", "high", "prohibited"]
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
-for ax, tag, title in ((axes[0], "system_dev", "Development set (63)"), (axes[1], "system_holdout", "Held-out set (14)")):
+for ax, tag, title in ((axes[0], "oracle_gold", "Rules only, development (63)"), (axes[1], "oracle_holdout", "Rules only, held-out (14)")):
     s = S[tag]
     if not s: ax.set_axis_off(); continue
     m = [[s["confusion"][g][p] for p in TIERS] for g in TIERS]
@@ -379,8 +390,18 @@ def per_variant(tag):
         rows.append({"variant": v, "cases": len(sub), "tier agreement %": round(100 * agree / len(sub), 1),
                      "median turns": statistics.median(r["team_messages"] for r in sub)})
     return pd.DataFrame(rows)
-display(per_variant("system_dev"))
-for tag in ("system_dev", "system_holdout"):
+sub = []
+for tag, model in (("system_120b", "gpt-oss-120b"), ("system_20b", "gpt-oss-20b")):
+    p = Path(f"results/{tag}_results.json")
+    if not p.exists(): continue
+    for r in json.loads(p.read_text()):
+        a = r["registration"]["assessment"] if r["registration"] else {}
+        b = base.get(r["case_id"], {}) if b_all else {}
+        sub.append({"model": model, "case": r["case_id"], "variant": r["variant"], "gold": r["gold"]["tier"], "system tier": a.get("bank_tier"),
+                    "v1 baseline tier (20b)": b.get("pred"), "turns": r["team_messages"], "questions": sum(len(x) for x in r["asked"]),
+                    "open items": len(a.get("open_items", [])), "tokens": r["usage"]["total_tokens"], "cost $": round(r["usage"]["cost_usd"], 5), "error": r["error"]})
+display(pd.DataFrame(sub))
+for tag in ("system_120b", "system_20b"):
     s = S[tag]
     if s:
         print(f"\\n{tag}: under-tiered: {s['under_tiered_cases']}\\n{tag}: over-tiered: {s['over_tiered_cases']}")
@@ -399,10 +420,10 @@ JUDGE = '''You check an AI-drafted summary against the facts it was written from
 from engine.llm import chat_json, Usage
 judge_file = Path("results/judge_summaries.json")
 judged = json.loads(judge_file.read_text()) if judge_file.exists() else {}
-p = Path("results/system_dev_results.json")
-if p.exists() and os.environ.get("GROQ_API_KEY"):
+sys_results = [r for t in ("system_120b", "system_20b") if Path(f"results/{t}_results.json").exists() for r in json.loads(Path(f"results/{t}_results.json").read_text())]
+if sys_results and os.environ.get("GROQ_API_KEY"):
     ju = Usage()
-    for r in json.loads(p.read_text()):
+    for r in sys_results:
         if not r["registration"] or r["case_id"] in judged: continue
         summ = r["registration"]["assessment"].get("system_summary") or ""
         facts = {k: v["value"] for k, v in r["registration"]["fields"].items()}
@@ -442,20 +463,20 @@ md("""
 
 code("""
 rows = []
-for tag in ("system_dev", "system_holdout"):
+for tag in ("system_120b", "system_20b"):
     p = Path(f"results/{tag}_results.json")
     if not p.exists(): continue
     for r in json.loads(p.read_text()):
         for cl in r.get("usage_calls", []): rows.append({"set": tag, **cl})
 calls_df = pd.DataFrame(rows)
 if len(calls_df):
-    by = calls_df.groupby("step").agg(calls=("step", "size"), mean_in=("prompt_tokens", "mean"), mean_out=("completion_tokens", "mean"),
+    by = calls_df.groupby(["model", "step"]).agg(calls=("step", "size"), mean_in=("prompt_tokens", "mean"), mean_out=("completion_tokens", "mean"),
                                       mean_reasoning=("reasoning_tokens", "mean"), mean_latency_s=("latency_s", "mean"), total_cost_usd=("cost_usd", "sum")).round(1)
     display(by)
-    s = S["system_dev"]
+    s = S["system_120b"]
     per = s["cost_per_registration_usd_mean"]
     print(f"Mean per registration: {s['llm_calls_per_registration_mean']} calls, {s['tokens_per_registration_mean']:,} tokens, ${per:.5f}")
-    print(f"Whole evaluation (system runs, dev + held-out): ${calls_df.cost_usd.sum():.4f} for {len(calls_df)} calls, {int(calls_df.prompt_tokens.sum() + calls_df.completion_tokens.sum()):,} tokens")
+    print(f"All system runs in this notebook: ${calls_df.cost_usd.sum():.4f} for {len(calls_df)} calls, {int(calls_df.prompt_tokens.sum() + calls_df.completion_tokens.sum()):,} tokens")
     print(f"Projection: 40 registrations a year (upper end of the Phase 1 estimate) = ${40*per:.2f} of model cost a year; "
           f"even at 20x the tokens it is under ${40*per*20:.2f}. Model cost is not the constraint; reviewer time is.")
 """)
