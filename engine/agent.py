@@ -228,6 +228,13 @@ class Agent:
                 continue
             ok = quote_supported(s.get("quote", ""), source_for_quotes)
             p = prohibited_name[code]
+            if code == "art5_1_h":
+                # Art. 5(1)(h) covers real-time remote biometric identification FOR LAW ENFORCEMENT. The Bank is not a
+                # law-enforcement authority, so the practice is Annex III 1(a) high risk, not prohibited (found on H9-A).
+                eu_sig.append({"tier": "high", "code": code, "ref": p["ref"] + " (scope: law enforcement only)", "label": "Biometric identification; Art. 5(1)(h) does not apply to a bank, treated as Annex III 1(a)",
+                               "evidence": s.get("quote", "")[:300], "source": "model screening, scope-corrected"})
+                review_flags.append("Model cited Art. 5(1)(h); it applies only to law-enforcement use, so the case is held at high risk. Committee should confirm no use on behalf of the police.")
+                continue
             eu_sig.append({"tier": "prohibited" if ok else "high", "code": code, "ref": p["ref"], "label": p["name"],
                            "evidence": s.get("quote", "")[:300], "source": "model screening" + ("" if ok else " (quote not verified: raised to high and sent to committee)")})
             if not ok:

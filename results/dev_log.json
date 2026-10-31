@@ -118,5 +118,18 @@
   "change": "'unknown' is accepted only for fields asked in the previous question round; extraction prompt rule 6 rewritten (prompt v4). Affected cases re-run with the fix; the before-fix record is kept in results/failures/.",
   "metrics": {},
   "finding": "See section 6 for the re-run."
+ },
+ {
+  "iteration": "R3",
+  "when": "2026-10-31",
+  "set": "full system, real model (gpt-oss-120b)",
+  "change": "Art. 5(1)(h) limited to law-enforcement use in code: a model citation of 5(1)(h) is held at high risk (Annex III 1(a)) with a committee flag.",
+  "metrics": {
+   "case": "H9-A",
+   "tier_as_run": "prohibited",
+   "tier_after_fix_rescored_from_recorded_screening": "high",
+   "gold": "high"
+  },
+  "finding": "The model read 'may call the police' in a branch face-recognition brief as Art. 5(1)(h). That article covers real-time remote biometric identification for law enforcement, which a bank is not. Verified by re-scoring the recorded screening output (no new model call, to save the free-tier allowance); the table in section 6 shows the as-run result. Also seen on X11-S: the model built 'human oversight: done' from a monitoring sentence although the team said no review happens before a freeze. Not fixed; reported in the honesty section."
  }
 ]

@@ -1,0 +1,1311 @@
+[
+ {
+  "case_id": "P1-S",
+  "variant": "seeded",
+  "gold": "prohibited",
+  "gold_eu": "prohibited",
+  "pred": "high",
+  "rationale": "The system processes biometric data (voice recordings) to perform emotion recognition and generates wellbeing scores that are used in performance reviews and coaching decisions for call\u2011centre agents. According to the EU AI Act, AI systems used for human resource management\u2014including performance evaluation, selection, and promotion\u2014are classified as high\u2011risk. The combination of biometric data processing, emotion recognition, and HR decision support places VoicePulse in the high\u2011risk tier. ",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 547,
+   "completion_tokens": 405,
+   "reasoning_tokens": 301,
+   "cost_usd": 0.000163,
+   "latency_s": 0.88,
+   "total_tokens": 952
+  }
+ },
+ {
+  "case_id": "P1-A",
+  "variant": "adversarial",
+  "gold": "prohibited",
+  "gold_eu": "prohibited",
+  "pred": "high",
+  "rationale": "VoicePulse analyzes call recordings to detect agents\u2019 emotional states, which is a personal characteristic. According to Annex\u202fI of the EU AI Act, AI systems that analyze or predict personal characteristics in an employment context are classified as high\u2011risk. Even though the tool is used for supportive coaching rather than direct employment decisions, it still influences employee well-being and could affect fundamental rights, meeting the high\u2011risk criteria.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 237,
+   "completion_tokens": 1047,
+   "reasoning_tokens": 947,
+   "cost_usd": 0.000332,
+   "latency_s": 1.53,
+   "total_tokens": 1284
+  }
+ },
+ {
+  "case_id": "P2-C",
+  "variant": "complete",
+  "gold": "prohibited",
+  "gold_eu": "prohibited",
+  "pred": "high",
+  "rationale": "The TrustLens Social system is a high\u2011risk AI system under the EU AI Act. It processes personal data from public social media, online behaviour and contact networks to generate a trust score that directly determines account restrictions, debit\u2011card eligibility and transfer fees for all digital customers and applicants. The decisions are made automatically without human review, the model is a black box with no explanations, and the outcomes affect individuals\u2019 access to financial services and their fundamental rights. These characteristics meet the EU AI Act\u2019s definition of a high\u2011risk AI system, requiring conformity assessment, robust governance, transparency, and human oversight.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 539,
+   "completion_tokens": 634,
+   "reasoning_tokens": 495,
+   "cost_usd": 0.000231,
+   "latency_s": 1.01,
+   "total_tokens": 1173
+  }
+ },
+ {
+  "case_id": "P2-A",
+  "variant": "adversarial",
+  "gold": "prohibited",
+  "gold_eu": "prohibited",
+  "pred": "high",
+  "rationale": "The system performs profiling of customers based on public online signals to determine which account features and fee packages to offer, a form of automated decision-making that directly affects individuals\u2019 financial services. According to the EU AI Act, AI systems used for profiling in the financial sector are classified as high\u2011risk, requiring compliance with stringent regulatory obligations.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 220,
+   "completion_tokens": 382,
+   "reasoning_tokens": 298,
+   "cost_usd": 0.000131,
+   "latency_s": 0.81,
+   "total_tokens": 602
+  }
+ },
+ {
+  "case_id": "P3-S",
+  "variant": "seeded",
+  "gold": "prohibited",
+  "gold_eu": "prohibited",
+  "pred": "high",
+  "rationale": "The system processes facial images (biometric data) to infer sensitive attributes such as religious sect, religiosity level, and ethnicity, and uses these in automated marketing segmentation. This constitutes profiling that can influence consumer behaviour and involves special categories of data. According to the EU AI Act, AI systems that process biometric data for profiling purposes are classified as high\u2011risk, requiring compliance with stringent regulatory obligations.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 410,
+   "completion_tokens": 457,
+   "reasoning_tokens": 360,
+   "cost_usd": 0.000168,
+   "latency_s": 1.23,
+   "total_tokens": 867
+  }
+ },
+ {
+  "case_id": "P4-S",
+  "variant": "seeded",
+  "gold": "prohibited",
+  "gold_eu": "prohibited",
+  "pred": "high",
+  "rationale": "The system is a high\u2011risk AI application under the EU AI Act because it is used for marketing and sales in consumer finance, targets financially distressed customers (a vulnerable group), influences purchasing decisions with urgency messages, and operates on personal financial data. These characteristics fall within the Act\u2019s definition of high\u2011risk AI systems that must comply with strict regulatory requirements.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 395,
+   "completion_tokens": 302,
+   "reasoning_tokens": 213,
+   "cost_usd": 0.00012,
+   "latency_s": 0.75,
+   "total_tokens": 697
+  }
+ },
+ {
+  "case_id": "P4-A",
+  "variant": "adversarial",
+  "gold": "prohibited",
+  "gold_eu": "prohibited",
+  "pred": "high",
+  "rationale": "The model is used to personalize and automatically generate pre\u2011approved short\u2011term financing offers for consumers, which directly influences credit decisions and financial product access. According to the EU AI Act, AI systems that determine eligibility for credit or financial services are classified as high\u2011risk. Therefore this use case falls into the high tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 220,
+   "completion_tokens": 234,
+   "reasoning_tokens": 152,
+   "cost_usd": 8.7e-05,
+   "latency_s": 1.13,
+   "total_tokens": 454
+  }
+ },
+ {
+  "case_id": "P5-C",
+  "variant": "complete",
+  "gold": "prohibited",
+  "gold_eu": "prohibited",
+  "pred": "high",
+  "rationale": "The system performs 1:N facial identification using biometric data, which is listed as a high\u2011risk AI application under the EU AI Act. It processes facial images, generates similarity scores, and informs fraud analysts, but it does not provide final decisions. Nevertheless, the use of facial recognition for identification/verification of persons in a commercial fraud\u2011prevention context falls under the high\u2011risk category.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 460,
+   "completion_tokens": 573,
+   "reasoning_tokens": 476,
+   "cost_usd": 0.000206,
+   "latency_s": 1.19,
+   "total_tokens": 1033
+  }
+ },
+ {
+  "case_id": "H1-C",
+  "variant": "complete",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system is a credit\u2011scoring AI used to estimate default probability and produce a credit score that directly influences financing approvals for individuals. Under the EU AI Act, credit scoring for individuals is explicitly listed as a high\u2011risk application. The system has a significant impact on individuals\u2019 financial opportunities, is used in a regulated financial context, and involves personal financial data. Therefore it falls into the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 818,
+   "completion_tokens": 299,
+   "reasoning_tokens": 198,
+   "cost_usd": 0.000151,
+   "latency_s": 0.89,
+   "total_tokens": 1117
+  }
+ },
+ {
+  "case_id": "H1-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system is an AI-based credit scoring model used to determine creditworthiness and financing limits for individual consumers, directly influencing financial decisions. According to the EU AI Act, AI systems that assess individuals for credit decisions are classified as high\u2011risk. The model is deployed in production, processes personal financial data, and its outputs are used by credit officers in 95% of cases, meeting the criteria for a high\u2011risk AI system. Therefore, it falls under the \"high\" tier. ",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 759,
+   "completion_tokens": 227,
+   "reasoning_tokens": 112,
+   "cost_usd": 0.000125,
+   "latency_s": 0.84,
+   "total_tokens": 986
+  }
+ },
+ {
+  "case_id": "H1-A",
+  "variant": "adversarial",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The tool is used for credit scoring of individual applicants, which the EU AI Act classifies as a high\u2011risk AI system. It supports decision\u2011making in a regulated sector (credit provision) and, despite being in\u2011house and under human oversight, it must meet the high\u2011risk requirements of the Act.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 228,
+   "completion_tokens": 519,
+   "reasoning_tokens": 438,
+   "cost_usd": 0.000173,
+   "latency_s": 1.05,
+   "total_tokens": 747
+  }
+ },
+ {
+  "case_id": "H2-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "minimal",
+  "rationale": "The QuickCash AI system is deployed only in Pakistan, serves only Pakistani retail customers, and does not process or affect EU persons or data. Under the EU AI Act, AI systems that are not placed in the EU market or used for EU individuals are outside the scope of the Act\u2019s risk-based classification. Consequently, the system does not fall into the prohibited, high\u2011risk, or limited\u2011risk categories and is considered minimal risk by default.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 519,
+   "completion_tokens": 450,
+   "reasoning_tokens": 343,
+   "cost_usd": 0.000174,
+   "latency_s": 0.75,
+   "total_tokens": 969
+  }
+ },
+ {
+  "case_id": "H2-A",
+  "variant": "adversarial",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The QuickCash automation is used within a digital lending context to pre\u2011fill loan requests and instantly display results, effectively performing credit decisioning for nano\u2011loans. Under the EU AI Act, AI systems that assess creditworthiness or risk for financial services are classified as high\u2011risk. The system is live in production, owned by the lending team, and involves real\u2011time decision support, meeting the criteria for a high\u2011risk AI system.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 211,
+   "completion_tokens": 413,
+   "reasoning_tokens": 306,
+   "cost_usd": 0.00014,
+   "latency_s": 1.18,
+   "total_tokens": 624
+  }
+ },
+ {
+  "case_id": "H3-C",
+  "variant": "complete",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system performs credit scoring for consumer credit (re\u2011scoring cardholders\u2019 creditworthiness and recommending limit changes), which is explicitly listed as a high\u2011risk AI application under the EU AI Act. It processes personal financial data, makes decisions that materially affect individuals\u2019 credit limits, and applies automatic limit decreases without human review. The system is used by a bank operating in the EU and the vendor processes data in an EU data centre, so the EU AI Act\u2019s scope applies. Therefore the use case falls into the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 619,
+   "completion_tokens": 658,
+   "reasoning_tokens": 532,
+   "cost_usd": 0.000244,
+   "latency_s": 1.02,
+   "total_tokens": 1277
+  }
+ },
+ {
+  "case_id": "H3-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The AI system performs creditworthiness scoring and automatically adjusts credit limits, which falls under the EU AI Act\u2019s definition of a high\u2011risk AI system (credit scoring). Even though the pilot is outside the EU, the system\u2019s function and the use of personal financial data qualify it for the high\u2011risk tier. The system is not prohibited, and it does not meet the criteria for limited or minimal risk. The vendor\u2019s compliance measures (ISO 27001, pen\u2011test, audit rights, impact assessment, etc.) address regulatory requirements but do not change the risk classification. The system is therefore classified as high risk. ",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 568,
+   "completion_tokens": 617,
+   "reasoning_tokens": 475,
+   "cost_usd": 0.000228,
+   "latency_s": 1.35,
+   "total_tokens": 1185
+  }
+ },
+ {
+  "case_id": "H4-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system performs real\u2011time credit decisions (eligibility for BNPL and installment limits) for individual shoppers, which falls under the EU AI Act\u2019s definition of a high\u2011risk AI system. The decisions are fully automated with no human review, involve personal financial data, and are used to influence a consumer\u2019s financial situation. Although the service is not currently deployed in the EU, the classification reflects the inherent risk level of the AI system if it were to be used within the EU market.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 452,
+   "completion_tokens": 532,
+   "reasoning_tokens": 416,
+   "cost_usd": 0.000193,
+   "latency_s": 1.33,
+   "total_tokens": 984
+  }
+ },
+ {
+  "case_id": "H5-C",
+  "variant": "complete",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The TalentRank system is an AI application used for recruitment decisions\u2014specifically, scoring and ranking candidates for graduate hiring. Under the EU AI Act, AI systems used in employment (including recruitment and selection) are classified as high\u2011risk. The system processes personal data, influences hiring outcomes, and is used by recruiters to make decisions that affect candidates. Therefore, it falls into the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 594,
+   "completion_tokens": 791,
+   "reasoning_tokens": 692,
+   "cost_usd": 0.000282,
+   "latency_s": 1.35,
+   "total_tokens": 1385
+  }
+ },
+ {
+  "case_id": "H5-A",
+  "variant": "adversarial",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system is used for sorting CVs in the recruitment process, which falls under the EU AI Act\u2019s definition of high\u2011risk AI systems for recruitment and selection of employees. Even though recruiters retain full control and candidates do not interact directly, the AI\u2019s role in influencing hiring decisions qualifies it as high risk.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 214,
+   "completion_tokens": 408,
+   "reasoning_tokens": 328,
+   "cost_usd": 0.000138,
+   "latency_s": 0.68,
+   "total_tokens": 622
+  }
+ },
+ {
+  "case_id": "H6-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system is used for HR performance management, providing ratings that influence employee evaluation, compensation, and career decisions. According to the EU AI Act, AI systems used for personnel selection, evaluation, or performance management are classified as high\u2011risk due to the significant impact on individuals\u2019 rights and potential for discrimination. The system processes personal data, produces scores that affect employees, and is used by managers to make decisions, meeting the criteria for a high\u2011risk AI system.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 409,
+   "completion_tokens": 298,
+   "reasoning_tokens": 187,
+   "cost_usd": 0.00012,
+   "latency_s": 0.89,
+   "total_tokens": 707
+  }
+ },
+ {
+  "case_id": "H7-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system is used to rank employees for redundancy selection, a core employment decision that directly affects fundamental rights and employment status. According to the EU AI Act, AI systems used for employment decisions, especially those influencing termination or redundancy, are classified as high\u2011risk. The system processes personal data, is not prohibited, and its use is not limited to low\u2011risk contexts, thus it falls into the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 397,
+   "completion_tokens": 354,
+   "reasoning_tokens": 252,
+   "cost_usd": 0.000136,
+   "latency_s": 0.84,
+   "total_tokens": 751
+  }
+ },
+ {
+  "case_id": "H8-C",
+  "variant": "complete",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system performs automated health risk assessment and pricing for individual health takaful plans, which is a decision-making application that directly affects individuals\u2019 financial terms. It processes special\u2011category personal data (health information) and uses a machine learning model to determine pricing. Under the EU AI Act, AI systems used for health\u2011related profiling, insurance pricing, or credit decisions are classified as high\u2011risk. Even though the system is not deployed in the EU and no EU persons are affected, the nature of the application and the data it processes place it in the high\u2011risk tier according to the Act\u2019s definition.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 603,
+   "completion_tokens": 453,
+   "reasoning_tokens": 314,
+   "cost_usd": 0.000181,
+   "latency_s": 1.06,
+   "total_tokens": 1056
+  }
+ },
+ {
+  "case_id": "H9-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "BranchGuard employs deep\u2011learning face recognition to identify individuals against a watchlist of known fraudsters, which falls under the EU AI Act\u2019s definition of a high\u2011risk biometric identification system for security purposes. The system is used for real\u2011time identification and alert generation, and it is not yet assessed or certified, but its application and data type (facial biometric data) place it in the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 417,
+   "completion_tokens": 312,
+   "reasoning_tokens": 210,
+   "cost_usd": 0.000125,
+   "latency_s": 1.47,
+   "total_tokens": 729
+  }
+ },
+ {
+  "case_id": "H9-A",
+  "variant": "adversarial",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system performs biometric identification and categorization of individuals for security purposes in a branch setting, which falls under the EU AI Act\u2019s definition of a high\u2011risk AI system. Even though staff decide the final action and the system does not generate content, the use of biometric data for identifying persons of concern in a security context requires compliance with the high\u2011risk regulatory framework.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 217,
+   "completion_tokens": 336,
+   "reasoning_tokens": 244,
+   "cost_usd": 0.000117,
+   "latency_s": 0.59,
+   "total_tokens": 553
+  }
+ },
+ {
+  "case_id": "H10-C",
+  "variant": "complete",
+  "gold": "high",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The system makes automated decisions that directly affect individuals\u2019 access to financial services by declining and blocking card transactions. It can lead to financial loss and potential discrimination (age bias). According to the EU AI Act, such automated decision\u2011making in the financial sector is classified as a high\u2011risk AI system. The system also processes personal financial data and operates in real time, meeting the criteria for high risk. Therefore it falls under the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 584,
+   "completion_tokens": 485,
+   "reasoning_tokens": 377,
+   "cost_usd": 0.000189,
+   "latency_s": 1.19,
+   "total_tokens": 1069
+  }
+ },
+ {
+  "case_id": "H10-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "CardShield is a high\u2011risk AI system under the EU AI Act because it is used for fraud detection in the payments sector, can automatically decline and block cards without human review, has a significant impact on cardholders, processes personal financial data, and is deployed in a critical financial service. The Act classifies AI systems used for risk assessment in financial services, including fraud detection, as high\u2011risk.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 526,
+   "completion_tokens": 718,
+   "reasoning_tokens": 619,
+   "cost_usd": 0.000255,
+   "latency_s": 1.01,
+   "total_tokens": 1244
+  }
+ },
+ {
+  "case_id": "H11-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system processes biometric data (voice recordings) and performs emotion recognition to identify anger and distress, which is explicitly listed as a high\u2011risk AI application under the EU AI Act. It is used to influence decision\u2011making (flagging calls for priority handling) and could impact individuals\u2019 privacy and fundamental rights. Therefore, the use case falls into the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 417,
+   "completion_tokens": 465,
+   "reasoning_tokens": 372,
+   "cost_usd": 0.000171,
+   "latency_s": 0.74,
+   "total_tokens": 882
+  }
+ },
+ {
+  "case_id": "H11-A",
+  "variant": "adversarial",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "minimal",
+  "rationale": "The ToneSense plug\u2011in is a support tool that flags calls for review; it does not autonomously make decisions or generate content, and staff review all highlights. It does not fall into any of the high\u2011risk categories (critical infrastructure, biometric identification, law enforcement, etc.) and therefore is classified as minimal risk under the EU AI Act.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 213,
+   "completion_tokens": 371,
+   "reasoning_tokens": 283,
+   "cost_usd": 0.000127,
+   "latency_s": 0.58,
+   "total_tokens": 584
+  }
+ },
+ {
+  "case_id": "H12-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "The system is not used in the EU and does not affect EU residents. Under the EU AI Act, an AI system that restricts financial transactions would be considered high\u2011risk if placed on the market or put into service in the EU. Because it is not used in the EU, it falls outside the scope of the Act and can be classified as minimal for the purposes of this exercise.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 406,
+   "completion_tokens": 934,
+   "reasoning_tokens": 838,
+   "cost_usd": 0.000311,
+   "latency_s": 1.32,
+   "total_tokens": 1340
+  }
+ },
+ {
+  "case_id": "H13-C",
+  "variant": "complete",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "minimal",
+  "rationale": "The PayAdvance Score system is used exclusively outside the EU, with no EU customers or data subjects affected, and its outputs are not deployed within the EU. It operates as a low\u2011risk decision support tool: it only provides eligibility recommendations for salary advances, is subject to human review and override by payroll officers, does not process biometric data, and has been designed with fairness checks, monitoring, and logging. Under the EU AI Act, such a system would be classified as a minimal\u2011risk AI application, and it is not subject to the higher regulatory requirements that apply to high\u2011risk or prohibited AI use cases.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 508,
+   "completion_tokens": 508,
+   "reasoning_tokens": 367,
+   "cost_usd": 0.00019,
+   "latency_s": 0.9,
+   "total_tokens": 1016
+  }
+ },
+ {
+  "case_id": "L1-C",
+  "variant": "complete",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "minimal",
+  "rationale": "The AskAmana chatbot is a non\u2011decision\u2011making LLM that only provides general product information and directs users to human agents for any account\u2011specific requests. It does not process biometric data, does not influence fundamental rights, and is not used by EU persons or for EU\u2011based services. According to the EU AI Act, such a system falls into the minimal\u2011risk category, as it does not meet the criteria for high\u2011risk or limited\u2011risk AI systems and is not prohibited.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 594,
+   "completion_tokens": 513,
+   "reasoning_tokens": 395,
+   "cost_usd": 0.000198,
+   "latency_s": 0.94,
+   "total_tokens": 1107
+  }
+ },
+ {
+  "case_id": "L1-S",
+  "variant": "seeded",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "minimal",
+  "rationale": "The AskAmana chatbot is a low\u2011risk AI system: it provides general product information, does not offer account\u2011specific or financial advice, uses no biometric data, and is not deployed for EU users or outputs. The system is grounded on approved documents, includes safety measures (output filtering, refusal logic, citation, and monitoring), and is operated outside the EU. Under the EU AI Act, such a system falls into the minimal\u2011risk category.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 517,
+   "completion_tokens": 430,
+   "reasoning_tokens": 321,
+   "cost_usd": 0.000168,
+   "latency_s": 0.7,
+   "total_tokens": 947
+  }
+ },
+ {
+  "case_id": "L2-S",
+  "variant": "seeded",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "minimal",
+  "rationale": "The VoiceDesk system is a conversational AI used for customer service that only provides account balances and transaction information after authentication and routes calls. It does not make decisions, provide advice, or profile users. It does not use voice biometrics or other high\u2011risk identity verification methods. The system is not used in the EU and no EU residents are affected, so the EU AI Act\u2019s high\u2011risk criteria do not apply. Therefore it falls into the minimal\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 410,
+   "completion_tokens": 1043,
+   "reasoning_tokens": 931,
+   "cost_usd": 0.000344,
+   "latency_s": 1.65,
+   "total_tokens": 1453
+  }
+ },
+ {
+  "case_id": "L3-C",
+  "variant": "complete",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "minimal",
+  "rationale": "The CampaignWriter system is used solely to draft marketing emails, social media posts, and campaign images for deposit products. It does not process personal data, biometric data, or make decisions about individuals. The content is not tailored to specific individuals, nor does it influence behavior in a targeted manner. The system is subject to human approval, compliance checks, and watermarking, further mitigating risk. Under the EU AI Act, such non\u2011personal, non\u2011targeted marketing content generation falls into the minimal\u2011risk category.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 413,
+   "completion_tokens": 949,
+   "reasoning_tokens": 828,
+   "cost_usd": 0.000316,
+   "latency_s": 1.67,
+   "total_tokens": 1362
+  }
+ },
+ {
+  "case_id": "L3-S",
+  "variant": "seeded",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "high",
+  "rationale": "The CampaignWriter system is an AI tool that generates marketing emails, social media posts and campaign images intended for customers. According to the EU AI Act Annex\u202fI, AI systems used for advertising or influencing individuals are classified as high\u2011risk. Even though marketing staff approve every output, the system itself is deployed for marketing content creation, which falls within the high\u2011risk category.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 363,
+   "completion_tokens": 450,
+   "reasoning_tokens": 357,
+   "cost_usd": 0.000162,
+   "latency_s": 0.96,
+   "total_tokens": 813
+  }
+ },
+ {
+  "case_id": "L4-S",
+  "variant": "seeded",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "high",
+  "rationale": "The system generates synthetic video and voice of a real person (deepfake) for public communication (marketing on social media). According to the EU AI Act, AI systems used for public communication that produce deepfakes are classified as high\u2011risk. The use of biometric data (face and voice) further reinforces the high\u2011risk status. No exemptions apply because the content is not political persuasion or non\u2011public communication. Therefore the use case falls under the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 358,
+   "completion_tokens": 846,
+   "reasoning_tokens": 733,
+   "cost_usd": 0.000281,
+   "latency_s": 1.43,
+   "total_tokens": 1204
+  }
+ },
+ {
+  "case_id": "L5-S",
+  "variant": "seeded",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "minimal",
+  "rationale": "The system is a large\u2011language\u2011model\u2011based drafting tool that assists customer\u2011service agents in composing replies to complaints. It does not make decisions about refunds, compensation, or any other outcome that materially affects the customer. The AI is used only to generate text that is subsequently reviewed and approved by a human agent before it is sent. The system does not process biometric data, nor does it influence legal or significant economic decisions. According to the EU AI Act, such a use case falls outside the high\u2011risk categories and is not prohibited, thus it is classified as minimal risk.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 426,
+   "completion_tokens": 574,
+   "reasoning_tokens": 439,
+   "cost_usd": 0.000204,
+   "latency_s": 1.14,
+   "total_tokens": 1000
+  }
+ },
+ {
+  "case_id": "L6-C",
+  "variant": "complete",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "high",
+  "rationale": "The system provides personalized product recommendations for savings and term deposit products, which falls under the EU AI Act\u2019s definition of \"advice on financial products\"\u2014a high\u2011risk category. Even though it is not currently used in the EU, the use case would be classified as high risk if deployed there. The system processes personal financial data, uses an open\u2011weight LLM, and influences customer decisions, meeting the criteria for a high\u2011risk AI system.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 463,
+   "completion_tokens": 376,
+   "reasoning_tokens": 266,
+   "cost_usd": 0.000148,
+   "latency_s": 0.83,
+   "total_tokens": 839
+  }
+ },
+ {
+  "case_id": "L6-S",
+  "variant": "seeded",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "high",
+  "rationale": "The system provides personalized financial product recommendations to retail customers, influencing their financial decisions. According to the EU AI Act, AI systems used in financial services for advice or recommendation are classified as high\u2011risk. The system processes personal financial data, operates in a commercial context, and can affect consumer choices, meeting the criteria for a high\u2011risk AI system.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 438,
+   "completion_tokens": 308,
+   "reasoning_tokens": 220,
+   "cost_usd": 0.000125,
+   "latency_s": 0.8,
+   "total_tokens": 746
+  }
+ },
+ {
+  "case_id": "L7-C",
+  "variant": "complete",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "minimal",
+  "rationale": "The OnboardBuddy system is a conversational AI that only provides guidance and checks document image quality during digital account opening. It does not make any KYC or account approval decisions, and all final decisions are made by human staff. The system does not use biometric data, does not influence critical infrastructure or public services, and is not used by EU residents or within the EU. According to the EU AI Act, such non-decision\u2011making, low\u2011impact AI applications that do not affect fundamental rights fall into the minimal\u2011risk category. No prohibited or high\u2011risk functions are present, and the system is not subject to the stringent requirements of the limited\u2011risk tier. Therefore, it is classified as minimal risk.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 445,
+   "completion_tokens": 378,
+   "reasoning_tokens": 217,
+   "cost_usd": 0.000147,
+   "latency_s": 0.71,
+   "total_tokens": 823
+  }
+ },
+ {
+  "case_id": "L7-S",
+  "variant": "seeded",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": null,
+  "error": "Groq HTTP 400: {\"error\":{\"message\":\"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"{\\\"tier\\\":\\\"minimal\\\",\\\"rationale\\\":\\\"The OnboardBuddy system is a conversational AI that only provide",
+  "usage": {
+   "calls": 0,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "reasoning_tokens": 0,
+   "cost_usd": 0.0,
+   "latency_s": 0.0,
+   "total_tokens": 0
+  }
+ },
+ {
+  "case_id": "L8-C",
+  "variant": "complete",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "minimal",
+  "rationale": "The LetterLingo system performs a transformation (translation) of customer letters, a non\u2011public\u2011interest commercial activity. It does not influence decisions affecting individuals, does not process biometric data, and is subject to human review and quality controls. According to the EU AI Act, such a transformation use case is classified as minimal risk. The system is not used for legal, medical, or public\u2011interest purposes, and no EU residents are affected, further supporting a minimal\u2011risk classification.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 431,
+   "completion_tokens": 701,
+   "reasoning_tokens": 586,
+   "cost_usd": 0.000243,
+   "latency_s": 1.17,
+   "total_tokens": 1132
+  }
+ },
+ {
+  "case_id": "L8-S",
+  "variant": "seeded",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": null,
+  "error": "Groq HTTP 400: {\"error\":{\"message\":\"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"{\\\"tier\\\":\\\"minimal\\\",\\\"rationale\\\":\\\"The LetterLingo system is a commercial translation\u2011capable LLM A",
+  "usage": {
+   "calls": 0,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "reasoning_tokens": 0,
+   "cost_usd": 0.0,
+   "latency_s": 0.0,
+   "total_tokens": 0
+  }
+ },
+ {
+  "case_id": "L9-C",
+  "variant": "complete",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "minimal",
+  "rationale": "The SiteGuide chatbot provides general information about products, profit rates, and branch locations to website visitors without making any decisions that affect individuals. It does not process personal data, biometric data, or any sensitive information, and it only uses publicly available content. According to the EU AI Act, such non\u2011decision\u2011making, non\u2011personal\u2011data\u2011processing AI systems fall into the minimal\u2011risk category. No high\u2011risk use cases (e.g., credit scoring, employment decisions, or medical diagnosis) are present, and the system includes safeguards such as a refusal policy and source links. Therefore, it is classified as minimal risk.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 358,
+   "completion_tokens": 368,
+   "reasoning_tokens": 223,
+   "cost_usd": 0.000137,
+   "latency_s": 0.82,
+   "total_tokens": 726
+  }
+ },
+ {
+  "case_id": "L10-S",
+  "variant": "seeded",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "limited",
+  "rationale": "The system is a chatbot that automatically generates public replies to customer comments on social media for customer service purposes. It does not influence fundamental rights, make high\u2011stakes decisions, or involve prohibited uses such as political persuasion or biometric identification. According to the EU AI Act, such customer\u2011service chatbots are classified as limited\u2011risk AI systems, provided they meet transparency and oversight requirements \u2013 which the use case does (AI\u2011assisted sign\u2011off, daily review, escalation rules, and a topic blocklist).",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 359,
+   "completion_tokens": 736,
+   "reasoning_tokens": 616,
+   "cost_usd": 0.000248,
+   "latency_s": 1.12,
+   "total_tokens": 1095
+  }
+ },
+ {
+  "case_id": "M1-C",
+  "variant": "complete",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "The DevPilot coding assistant is used internally by developers for code completion and explanation, does not produce outputs about individuals, does not handle personal or biometric data, and is subject to code review, static analysis, and security controls. It does not influence decisions about people or operate in critical infrastructure, so it falls outside the high\u2011risk and prohibited categories of the EU AI Act and is classified as a minimal\u2011risk AI system.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 446,
+   "completion_tokens": 271,
+   "reasoning_tokens": 168,
+   "cost_usd": 0.000115,
+   "latency_s": 0.64,
+   "total_tokens": 717
+  }
+ },
+ {
+  "case_id": "M1-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "The DevPilot system is an internal, non\u2011critical coding assistant that only suggests code completions and explanations to developers. It does not produce outputs about individuals, does not influence safety\u2011critical decisions, and is used solely for internal productivity. According to the EU AI Act, such a narrow, non\u2011high\u2011risk application falls under the minimal\u2011risk category and is not subject to the stricter regulatory requirements of high\u2011risk or prohibited AI systems.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 409,
+   "completion_tokens": 242,
+   "reasoning_tokens": 133,
+   "cost_usd": 0.000103,
+   "latency_s": 0.72,
+   "total_tokens": 651
+  }
+ },
+ {
+  "case_id": "M2-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "PolicyFinder is an internal, non\u2011decision\u2011making AI system that only provides information and summaries of internal policy documents. It does not influence decisions about individuals, does not process personal data, and is used solely by staff within the bank. According to the EU AI Act, such a system falls into the low\u2011risk category, subject only to minimal obligations.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 319,
+   "completion_tokens": 289,
+   "reasoning_tokens": 199,
+   "cost_usd": 0.000111,
+   "latency_s": 0.42,
+   "total_tokens": 608
+  }
+ },
+ {
+  "case_id": "M3-C",
+  "variant": "complete",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "CashCast is an internal decision\u2011support AI that forecasts aggregate ATM withdrawals using non\u2011personal, historical transaction data. It does not directly affect individuals, does not use biometric or sensitive personal data, and is not used for credit, law\u2011enforcement, or other high\u2011risk purposes defined in the EU AI Act. Therefore it falls into the minimal\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 371,
+   "completion_tokens": 1099,
+   "reasoning_tokens": 1007,
+   "cost_usd": 0.000358,
+   "latency_s": 1.98,
+   "total_tokens": 1470
+  }
+ },
+ {
+  "case_id": "M3-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "The CashCast system forecasts aggregate ATM cash withdrawals to aid internal cash\u2011replenishment planning. It processes only aggregated, non\u2011personal data, does not produce content, and does not directly affect individuals\u2019 rights or decisions. It is not used for credit scoring, risk assessment of financial products, or any other activity listed as high\u2011risk under the EU AI Act. Therefore it falls into the minimal\u2011risk category.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 333,
+   "completion_tokens": 504,
+   "reasoning_tokens": 402,
+   "cost_usd": 0.000176,
+   "latency_s": 1.06,
+   "total_tokens": 837
+  }
+ },
+ {
+  "case_id": "M4-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "TicketSort is a background text\u2011classification system that processes ticket content (including staff names) to route tickets to resolver teams. It does not make decisions about individuals, does not use biometric data, and is not applied in a high\u2011risk domain such as health, safety, or critical infrastructure. According to the EU AI Act, such a system falls into the minimal\u2011risk category.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 308,
+   "completion_tokens": 355,
+   "reasoning_tokens": 260,
+   "cost_usd": 0.00013,
+   "latency_s": 0.85,
+   "total_tokens": 663
+  }
+ },
+ {
+  "case_id": "M5-C",
+  "variant": "complete",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The LogWatch system is an AI-based cybersecurity tool used to detect potential cyberattacks on the bank\u2019s critical infrastructure. According to the EU AI Act, AI systems employed in security, public safety, or critical infrastructure are classified as high\u2011risk. Although the system does not generate content about individuals and its outputs are alerts for analysts, its role in safeguarding essential services places it in the high\u2011risk tier. The system\u2019s unsupervised anomaly detection, reliance on staff user IDs in logs, and the requirement for rigorous governance (monthly tuning, fallback rules, vendor assessment) further reinforce its high\u2011risk status.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 361,
+   "completion_tokens": 583,
+   "reasoning_tokens": 442,
+   "cost_usd": 0.000202,
+   "latency_s": 0.93,
+   "total_tokens": 944
+  }
+ },
+ {
+  "case_id": "M6-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "The InvoiceRead system extracts non\u2011personal invoice data (invoice number, amount, due date) from supplier documents and writes draft entries to the payables system. It does not process personal or biometric data, does not influence individual decisions, and is not used in a high\u2011risk context such as credit scoring, law enforcement, or critical infrastructure. The outputs are not about individuals and the system is subject to staff approval before any financial action. Therefore, it falls under the minimal\u2011risk category of the EU AI Act.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 286,
+   "completion_tokens": 843,
+   "reasoning_tokens": 721,
+   "cost_usd": 0.000274,
+   "latency_s": 1.25,
+   "total_tokens": 1129
+  }
+ },
+ {
+  "case_id": "M7-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "MinutesAI is an internal productivity tool that transcribes meetings and drafts minutes for staff approval. It does not influence decisions, evaluate individuals, or affect public safety. The system is used only within the organization, with no direct user interaction, and the vendor is pre\u2011trained and hosted in the EU. According to the EU AI Act, such a non\u2011high\u2011risk, non\u2011prohibited application falls into the minimal risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 322,
+   "completion_tokens": 354,
+   "reasoning_tokens": 249,
+   "cost_usd": 0.00013,
+   "latency_s": 1.3,
+   "total_tokens": 676
+  }
+ },
+ {
+  "case_id": "M8-C",
+  "variant": "complete",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "The ComplaintRouter system processes written complaint text to classify product/topic, score sentiment, and route complaints to appropriate teams. It does not make decisions affecting individuals, does not generate content, and its outputs are not used within the EU or by EU persons. The system does not process special categories of personal data and is not deployed for high\u2011risk applications such as public administration or essential services. Consequently, under the EU AI Act it falls into the minimal\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 420,
+   "completion_tokens": 395,
+   "reasoning_tokens": 284,
+   "cost_usd": 0.00015,
+   "latency_s": 0.63,
+   "total_tokens": 815
+  }
+ },
+ {
+  "case_id": "M8-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "The ComplaintRouter AI system only classifies complaint text and routes complaints to appropriate teams; it does not make decisions that affect individuals, nor does it influence fundamental rights or safety. It is not used within the EU, so it does not fall under the EU AI Act\u2019s high\u2011risk or prohibited categories. Consequently, it is classified as a minimal\u2011risk AI system.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 388,
+   "completion_tokens": 322,
+   "reasoning_tokens": 230,
+   "cost_usd": 0.000126,
+   "latency_s": 0.62,
+   "total_tokens": 710
+  }
+ },
+ {
+  "case_id": "M9-C",
+  "variant": "complete",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The system is used for credit scoring in financial services, which is a high\u2011risk AI application under the EU AI Act. It assesses the creditworthiness of incorporated companies applying for working\u2011capital financing, a use case explicitly listed as high risk. The system operates in a regulated sector, influences financial decisions, and is subject to periodic validation, meeting the criteria for the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 366,
+   "completion_tokens": 411,
+   "reasoning_tokens": 315,
+   "cost_usd": 0.000151,
+   "latency_s": 0.8,
+   "total_tokens": 777
+  }
+ },
+ {
+  "case_id": "M9-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The system is used to score credit risk for incorporated companies applying for working\u2011capital financing, directly influencing credit decisions and financial outcomes. According to the EU AI Act, AI systems used in credit scoring for businesses fall under the \"high\u2011risk\" category as part of financial services. The system is not prohibited, nor does it meet the criteria for limited or minimal risk. Therefore it is classified as high risk.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 338,
+   "completion_tokens": 278,
+   "reasoning_tokens": 178,
+   "cost_usd": 0.000109,
+   "latency_s": 0.55,
+   "total_tokens": 616
+  }
+ },
+ {
+  "case_id": "M10-C",
+  "variant": "complete",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The AMLSentinel system is used in a regulated financial services context to detect money laundering. According to the EU AI Act, AI systems used in financial services for risk assessment and compliance are classified as high\u2011risk. The system uses machine learning to score transactions and customers, producing alerts that influence regulatory reporting. Although the final decision is made by human analysts, the system\u2019s role in a critical regulatory domain and its potential impact on individuals\u2019 rights and financial stability place it in the high\u2011risk category.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 466,
+   "completion_tokens": 1496,
+   "reasoning_tokens": 1378,
+   "cost_usd": 0.000484,
+   "latency_s": 2.04,
+   "total_tokens": 1962
+  }
+ },
+ {
+  "case_id": "M10-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The AMLSentinel system performs risk assessment of transactions and customers for money laundering, which falls under the EU AI Act\u2019s definition of high\u2011risk AI systems (AI used for the assessment of the risk of financial loss in the context of financial services). The system processes personal data, influences compliance decisions, and operates in a regulated sector, meeting the criteria for the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 422,
+   "completion_tokens": 787,
+   "reasoning_tokens": 692,
+   "cost_usd": 0.000268,
+   "latency_s": 1.84,
+   "total_tokens": 1209
+  }
+ },
+ {
+  "case_id": "M11-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "The HRHelp chatbot provides general information about leave rules, benefits, and HR procedures based on the HR manual. It does not collect or process personal data, does not use biometric data, and does not make decisions that affect individuals. The system is used internally for staff inquiries and does not influence employment decisions. According to the EU AI Act, such an information\u2011providing system with no personal data processing and no consequential decisions falls into the minimal risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 323,
+   "completion_tokens": 259,
+   "reasoning_tokens": 150,
+   "cost_usd": 0.000102,
+   "latency_s": 0.82,
+   "total_tokens": 582
+  }
+ },
+ {
+  "case_id": "M12-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The SelfieCheck system uses biometric facial data to perform identity verification, a core function identified by the EU AI Act as a high\u2011risk AI application. It processes personal data, makes a critical decision (account opening), and is deployed in a live production environment. Therefore it falls under the high\u2011risk tier, requiring compliance with the Act\u2019s stringent obligations.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 482,
+   "completion_tokens": 388,
+   "reasoning_tokens": 298,
+   "cost_usd": 0.000153,
+   "latency_s": 1.14,
+   "total_tokens": 870
+  }
+ },
+ {
+  "case_id": "M13-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The AI system is used for financial risk management (forecasting liquidity needs for the treasury desk), which falls under the EU AI Act\u2019s definition of high\u2011risk AI systems. It influences critical financial decisions and the bank\u2019s liquidity position, even though it does not process personal data. Therefore it must be classified as high risk.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 296,
+   "completion_tokens": 764,
+   "reasoning_tokens": 681,
+   "cost_usd": 0.000251,
+   "latency_s": 0.98,
+   "total_tokens": 1060
+  }
+ },
+ {
+  "case_id": "M14-C",
+  "variant": "complete",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "FraudLens performs risk assessment of individual customers\u2019 financial transactions to flag potential fraud, which is a high\u2011risk AI application under the EU AI Act. The system scores transfers, queues high\u2011risk ones for analyst review, and influences decisions that affect customers\u2019 financial assets. Even though it is not currently used in the EU, the Act\u2019s definition of high\u2011risk AI applies to the system\u2019s intended use and the nature of the decisions it supports.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 453,
+   "completion_tokens": 555,
+   "reasoning_tokens": 446,
+   "cost_usd": 0.0002,
+   "latency_s": 0.81,
+   "total_tokens": 1008
+  }
+ },
+ {
+  "case_id": "X1-A",
+  "variant": "adversarial",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "minimal",
+  "rationale": "The system is a low\u2011risk AI application that pre\u2011fills paperwork for car leasing transactions, providing a convenience feature for dealership staff. It does not generate content, influence decisions in high\u2011risk domains, or exploit vulnerabilities. Therefore, it falls under the minimal risk tier of the EU AI Act.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 212,
+   "completion_tokens": 297,
+   "reasoning_tokens": 219,
+   "cost_usd": 0.000105,
+   "latency_s": 0.57,
+   "total_tokens": 509
+  }
+ },
+ {
+  "case_id": "X2-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system is used in a financial service (mortgage lending) to assess creditworthiness and risk, providing recommendations that influence loan approval decisions. According to the EU AI Act, AI systems used for credit scoring or risk assessment in financial services are classified as high\u2011risk. The system is not prohibited, and it does not fall into the limited or minimal categories because it directly impacts individuals\u2019 access to credit. Therefore, it is classified as a high\u2011risk AI system.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 513,
+   "completion_tokens": 279,
+   "reasoning_tokens": 167,
+   "cost_usd": 0.000122,
+   "latency_s": 0.74,
+   "total_tokens": 792
+  }
+ },
+ {
+  "case_id": "X3-C",
+  "variant": "complete",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system performs biometric identification (face matching) and categorises individuals based on head/eye movements to detect cheating. It is used in an employment context (internal compliance certification). Under the EU AI Act, biometric identification and categorisation of individuals in employment, education or training is a high\u2011risk AI system. The system processes personal data (video, facial images) and can affect employees\u2019 fundamental rights, so it must be classified as high risk.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 520,
+   "completion_tokens": 679,
+   "reasoning_tokens": 571,
+   "cost_usd": 0.000243,
+   "latency_s": 1.58,
+   "total_tokens": 1199
+  }
+ },
+ {
+  "case_id": "X4-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "high",
+  "pred": "high",
+  "rationale": "The system scores and schedules individual tellers based on performance metrics, effectively determining working conditions and shift allocations. According to the EU AI Act, AI systems used for personnel assessment, selection, or determining working conditions are classified as high\u2011risk. The application does not involve biometric data or pay decisions, so it is not prohibited, but it falls squarely within the high\u2011risk category due to its impact on employment conditions.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 407,
+   "completion_tokens": 352,
+   "reasoning_tokens": 250,
+   "cost_usd": 0.000136,
+   "latency_s": 0.93,
+   "total_tokens": 759
+  }
+ },
+ {
+  "case_id": "X5-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The system predicts individual customer churn and is used to target outbound retention calls, constituting profiling for the purpose of influencing consumer behavior. According to the EU AI Act, such profiling is a high\u2011risk AI application. The model processes personal financial data and informs decisions that affect customers, meeting the high\u2011risk criteria. It is not prohibited, but it falls under the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 358,
+   "completion_tokens": 1331,
+   "reasoning_tokens": 1235,
+   "cost_usd": 0.000426,
+   "latency_s": 1.92,
+   "total_tokens": 1689
+  }
+ },
+ {
+  "case_id": "X6-C",
+  "variant": "complete",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "The system performs an anti\u2011spoofing check on video KYC recordings to flag potential manipulation or replay attacks. It does not identify or authenticate individuals, nor does it make decisions that directly affect the applicant. The output is a flag that is reviewed manually by a KYC officer, and the system is used only in Pakistan with no output or deployment in the EU. According to the EU AI Act, such a use case does not fall into the high\u2011risk categories (biometric identification/authentication, critical infrastructure, etc.) and is therefore classified as minimal risk.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 485,
+   "completion_tokens": 574,
+   "reasoning_tokens": 442,
+   "cost_usd": 0.000209,
+   "latency_s": 1.36,
+   "total_tokens": 1059
+  }
+ },
+ {
+  "case_id": "X7-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The system uses voice biometrics (biometric data) to perform 1:1 identity verification for customer authentication in a contact centre. According to the EU AI Act, biometric identification and authentication systems are classified as high\u2011risk AI systems because they process sensitive personal data, can impact individuals\u2019 rights and freedoms, and are used for identity verification. The system also includes explicit consent, opt\u2011out options, and fallback to non\u2011biometric authentication, but these do not change its high\u2011risk classification under the Act.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 394,
+   "completion_tokens": 235,
+   "reasoning_tokens": 113,
+   "cost_usd": 0.0001,
+   "latency_s": 0.61,
+   "total_tokens": 629
+  }
+ },
+ {
+  "case_id": "X8-S",
+  "variant": "seeded",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "minimal",
+  "rationale": "The system is a commercial LLM API used to draft business correspondence for corporate relationship managers. It does not influence decisions about individuals, does not process biometric data, and is not applied in high\u2011risk sectors such as employment, credit, or public services. According to the EU AI Act, such a use case falls under the minimal\u2011risk category, requiring only general compliance measures.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 300,
+   "completion_tokens": 574,
+   "reasoning_tokens": 480,
+   "cost_usd": 0.000195,
+   "latency_s": 1.06,
+   "total_tokens": 874
+  }
+ },
+ {
+  "case_id": "X9-S",
+  "variant": "seeded",
+  "gold": "high",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The AI system is used to automatically approve or reject insurance claims and set payouts, directly impacting individuals\u2019 financial outcomes. Under the EU AI Act, AI systems used in insurance and credit decisions are classified as high\u2011risk. The system does not fall into prohibited categories (e.g., biometric identification, political persuasion) and is not limited to a minimal or limited use case, so it is classified as high risk.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 414,
+   "completion_tokens": 353,
+   "reasoning_tokens": 253,
+   "cost_usd": 0.000137,
+   "latency_s": 0.67,
+   "total_tokens": 767
+  }
+ },
+ {
+  "case_id": "X10-C",
+  "variant": "complete",
+  "gold": "limited",
+  "gold_eu": "limited",
+  "pred": "minimal",
+  "rationale": "The LLM-based IR assistant provides general, non-personalized information about publicly available annual reports and disclosures. It does not influence high-stakes decisions, offer personalized financial or legal advice, or process biometric data. According to the EU AI Act, such a system falls into the minimal-risk category, as it does not meet the criteria for high-risk or prohibited AI applications.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 325,
+   "completion_tokens": 269,
+   "reasoning_tokens": 176,
+   "cost_usd": 0.000105,
+   "latency_s": 0.5,
+   "total_tokens": 594
+  }
+ },
+ {
+  "case_id": "X11-S",
+  "variant": "seeded",
+  "gold": "prohibited",
+  "gold_eu": "minimal",
+  "pred": "high",
+  "rationale": "The system automatically freezes accounts based on AI\u2011derived transaction patterns, directly impacting individuals\u2019 financial rights and property. It is used for fraud detection in a financial context, which the EU AI Act classifies as a high\u2011risk application. Even though currently deployed only in Pakistan, the system\u2019s nature and potential impact place it in the high\u2011risk tier.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 358,
+   "completion_tokens": 500,
+   "reasoning_tokens": 411,
+   "cost_usd": 0.000177,
+   "latency_s": 1.19,
+   "total_tokens": 858
+  }
+ },
+ {
+  "case_id": "X12-C",
+  "variant": "complete",
+  "gold": "prohibited",
+  "gold_eu": "prohibited",
+  "pred": "high",
+  "rationale": "The AI system scores candidates\u2019 facial expressions and tone to assess enthusiasm, confidence, and nervousness for recruitment decisions, which falls under the EU AI Act\u2019s definition of a high\u2011risk AI system (used for employment decisions).",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 411,
+   "completion_tokens": 195,
+   "reasoning_tokens": 132,
+   "cost_usd": 8.9e-05,
+   "latency_s": 0.71,
+   "total_tokens": 606
+  }
+ },
+ {
+  "case_id": "X13-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "The system generates internal guidance for collections agents based on pre\u2011approved scripts and fair\u2011debt\u2011collection rules, without using customer data or making decisions that affect individuals. It does not influence public or private sector decisions, does not process biometric data, and is used solely for staff productivity. According to the EU AI Act, such an AI application falls into the minimal\u2011risk category, as it does not pose significant risks to fundamental rights or safety.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 316,
+   "completion_tokens": 268,
+   "reasoning_tokens": 160,
+   "cost_usd": 0.000104,
+   "latency_s": 0.68,
+   "total_tokens": 584
+  }
+ },
+ {
+  "case_id": "X14-S",
+  "variant": "seeded",
+  "gold": "minimal",
+  "gold_eu": "minimal",
+  "pred": "minimal",
+  "rationale": "The system performs document classification and OCR to identify missing or expired mandatory documents for personal financing applications. It does not assess, score, or make decisions about individuals, nor does it produce content or use biometric data. According to the EU AI Act, such a system falls into the low\u2011risk category, which is classified as minimal risk. Additionally, the system is not deployed or used within the EU market, further supporting a minimal risk classification.",
+  "usage": {
+   "calls": 1,
+   "prompt_tokens": 405,
+   "completion_tokens": 317,
+   "reasoning_tokens": 211,
+   "cost_usd": 0.000125,
+   "latency_s": 0.62,
+   "total_tokens": 722
+  }
+ }
+]
