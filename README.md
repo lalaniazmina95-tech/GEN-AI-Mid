@@ -6,7 +6,7 @@ A chatbot each team uses to register its AI use case. It checks the brief agains
 
 | Deliverable | Where |
 |---|---|
-| Hosted application | Vercel (link in the notebook header) |
+| Hosted application | https://gen-ai-mid.vercel.app |
 | Notebook (implementation, prompts, agent loop, evaluation, failures, tokens and cost, honesty) | `notebooks/DATA722_Phase2_UseCaseC.ipynb` |
 | Honesty section (one page) | `docs/HONESTY.md` (also section 8 of the notebook) |
 | Video script and shot list (5 minutes) | `docs/VIDEO_SCRIPT.md` |
