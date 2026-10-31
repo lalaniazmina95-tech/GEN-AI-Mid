@@ -1,0 +1,122 @@
+[
+ {
+  "text": "Here is an example applicant: Ali Raza, CNIC 42101-1234567-1, salary 180,000.",
+  "block": true,
+  "note": "CNIC with dashes"
+ },
+ {
+  "text": "Test customer 4210112345671 failed the check last week.",
+  "block": true,
+  "note": "CNIC without dashes"
+ },
+ {
+  "text": "Disbursement goes to PK36SCBL0000001123456702 for this customer.",
+  "block": true,
+  "note": "IBAN"
+ },
+ {
+  "text": "The disputed card was 4111 1111 1111 1111 used at a merchant in Lahore.",
+  "block": true,
+  "note": "Luhn-valid card number"
+ },
+ {
+  "text": "Call the customer on 0300-1234567 if the model flags them.",
+  "block": true,
+  "note": "mobile number"
+ },
+ {
+  "text": "For example account no. 0123456789012 was blocked by the model.",
+  "block": true,
+  "note": "labelled account number"
+ },
+ {
+  "text": "The complainant emailed from sana.k@gmail.com about the decision.",
+  "block": true,
+  "note": "personal e-mail"
+ },
+ {
+  "text": "Applicant passport number AB1234567 was rejected by the liveness check.",
+  "block": true,
+  "note": "passport number"
+ },
+ {
+  "text": "+92 321 7654321 is the customer's number in the sample.",
+  "block": true,
+  "note": "mobile +92"
+ },
+ {
+  "text": "name,cnic,salary,score\nAli,42101-1234567-1,120000,712\nSara,35202-7654321-2,90000,650\nUsman,61101-1111111-1,150000,780\nHina,37405-2222222-2,70000,590\nBilal,42201-3333333-3,200000,810",
+  "block": true,
+  "note": "pasted table"
+ },
+ {
+  "text": "id|name|balance|limit|status\n1|A|20000|5000|ok\n2|B|15000|3000|ok\n3|C|99000|10000|late\n4|D|12000|2000|ok\n5|E|56000|7000|ok",
+  "block": true,
+  "note": "pipe table"
+ },
+ {
+  "text": "Customer acct # 1234-5678-9012 complained about the chatbot.",
+  "block": true,
+  "note": "acct # label"
+ },
+ {
+  "text": "The model uses CNIC, monthly salary and repayment history as inputs.",
+  "block": false,
+  "note": "describes data categories"
+ },
+ {
+  "text": "It scores about 12,000 applications a month with a Gini of 0.62.",
+  "block": false,
+  "note": "numbers"
+ },
+ {
+  "text": "We tested it on 25 to 40 use cases in 2026 with 95% recall.",
+  "block": false,
+  "note": "percentages and years"
+ },
+ {
+  "text": "Version 3.2.1 of the model went live on 2026-03-15.",
+  "block": false,
+  "note": "version and date"
+ },
+ {
+  "text": "Financing limits range from PKR 50,000 to PKR 1,500,000.",
+  "block": false,
+  "note": "amounts"
+ },
+ {
+  "text": "The vendor support address is support@vendor.example and the SLA is 24 hours.",
+  "block": false,
+  "note": "example domain"
+ },
+ {
+  "text": "Logs are kept for 3650 days and reviewed every 30 days.",
+  "block": false,
+  "note": "small numbers"
+ },
+ {
+  "text": "It processes around 4,000,000 transactions a month.",
+  "block": false,
+  "note": "large number with commas"
+ },
+ {
+  "text": "The model has 1,200,000,000 parameters.",
+  "block": false,
+  "note": "parameter count"
+ },
+ {
+  "text": "Our helpline number is printed on the card; customers can call it.",
+  "block": false,
+  "note": "mentions phone without number"
+ },
+ {
+  "text": "Account numbers are masked before anything is sent to the model.",
+  "block": false,
+  "note": "mentions account numbers"
+ },
+ {
+  "text": "We track the population stability index (PSI 0.08) every month.",
+  "block": false,
+  "note": "metrics"
+ }
+]
