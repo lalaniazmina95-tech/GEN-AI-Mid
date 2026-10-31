@@ -80,17 +80,19 @@ def chat_json(system: str, user: str, *, step: str, usage: Usage | None = None, 
     client = client or httpx.Client(timeout=60)
     try:
         last_err = None
-        for attempt in range(6):
+        max_wait = float(os.environ.get("GROQ_MAX_WAIT", 12))  # the eval runner raises this; web requests must finish < 60 s
+        attempts = int(os.environ.get("GROQ_ATTEMPTS", 4))
+        for attempt in range(attempts):
             t0 = time.time()
             try:
                 r = client.post(GROQ_URL, json=body, headers={"Authorization": f"Bearer {key}"})
             except httpx.HTTPError as e:
                 last_err = str(e)
-                time.sleep(2 ** attempt)
+                time.sleep(min(2 ** attempt, 4))
                 continue
             if r.status_code == 429:
                 wait = float(r.headers.get("retry-after", 2 ** attempt))
-                time.sleep(min(wait, 30) + 0.5)
+                time.sleep(min(wait, max_wait) + 0.5)
                 last_err = "rate limited"
                 continue
             if r.status_code == 400 and ("include_reasoning" in r.text or "reasoning_effort" in r.text):

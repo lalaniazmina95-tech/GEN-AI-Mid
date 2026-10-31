@@ -19,6 +19,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+import os  # noqa: E402
+
+os.environ.setdefault("GROQ_MAX_WAIT", "65")  # batch runs can wait out per-minute rate limits
+os.environ.setdefault("GROQ_ATTEMPTS", "10")
 from engine import pii  # noqa: E402
 from engine.config import MODEL, TIER_RANK  # noqa: E402
 from engine.llm import Usage, chat_json  # noqa: E402
