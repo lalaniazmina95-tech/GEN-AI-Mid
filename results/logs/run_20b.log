@@ -29,3 +29,16 @@ pii: {'n': 24, 'recall_pct': 100.0, 'precision_pct': 100.0, 'false_blocks': 0, '
 [baseline_20b_all] H11-A  gold=high       got=minimal
 [baseline_20b_all] H12-S  gold=high       got=minimal
 [baseline_20b_all] H13-C  gold=high       got=minimal
+[baseline_20b_all] L1-C   gold=limited    got=minimal
+[baseline_20b_all] L1-S   gold=limited    got=minimal
+[baseline_20b_all] L2-S   gold=limited    got=minimal
+[baseline_20b_all] L3-C   gold=limited    got=minimal
+[baseline_20b_all] L3-S   gold=limited    got=high
+[baseline_20b_all] L4-S   gold=limited    got=high
+[baseline_20b_all] L5-S   gold=limited    got=minimal
+[baseline_20b_all] L6-C   gold=limited    got=high
+[baseline_20b_all] L6-S   gold=limited    got=high
+[baseline_20b_all] L7-C   gold=limited    got=minimal
+[baseline_20b_all] L7-S   gold=limited    got=None
+[baseline_20b_all] L8-C   gold=limited    got=minimal
+[baseline_20b_all] L8-S   gold=limited    got=None
