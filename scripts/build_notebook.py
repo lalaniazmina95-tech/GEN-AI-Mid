@@ -218,35 +218,23 @@ The adversarial credit brief from section 2, played by the deterministic team si
 """)
 
 code("""
-from engine.agent import new_state
-from engine.llm import Usage
-from eval.simulator import TeamSimulator
-TRACE_FILE = Path("results/trace_H1-A.json")
-if TRACE_FILE.exists() and not os.environ.get("RERUN_TRACE"):
-    trace = json.loads(TRACE_FILE.read_text())
-else:
-    usage = Usage(); agent = Agent(usage=usage); sim = TeamSimulator(c); st = new_state(); trace = {"turns": []}
-    msg = sim.opening()
-    for _ in range(10):
-        out = agent.handle(st, msg); st = out["state"]
-        trace["turns"].append({"team": msg, "event": out["event"], "extracted": out.get("extracted"), "dropped": out.get("dropped"),
-                               "floor": out.get("floor_tier"), "reply": out["reply"], "asked": [q["id"] for q in st.get("last_asked", [])] if out["event"] == "ask" else []})
-        if out["event"] != "ask": break
-        msg = sim.answer(st["last_asked"])
-    reg = agent.finalize(st, inventory=seed)
-    trace.update({"registration": reg, "calls": usage.calls, "summary": usage.summary()})
-    TRACE_FILE.write_text(json.dumps(trace, indent=1, default=str))
-for i, t in enumerate(trace["turns"], 1):
-    print(f"\\n--- TEAM MESSAGE {i} ---\\n" + textwrap.shorten(t["team"], 400))
-    print(f"extracted: {t['extracted']}\\ndropped by quote check: {[d['id'] for d in t['dropped'] or []]}\\nrule floor now: {t['floor']}")
-    print(f"--- ASSISTANT ({t['event']}) ---\\n" + t["reply"][:1500])
-a = trace["registration"]["assessment"]
+# The representative run is the real gpt-oss-120b registration of case H1-A from the evaluation (results/raw/system_120b/H1-A.json).
+# It is loaded rather than re-run so the notebook does not spend the free-tier daily token allowance twice.
+rec = json.loads(Path("results/raw/system_120b/H1-A.json").read_text())
+reg = rec["registration"]
+trace = {"registration": reg, "calls": rec["usage_calls"], "summary": rec["usage"]}
+for t in reg["conversation"]:
+    who = "TEAM" if t["role"] == "user" else "ASSISTANT"
+    print(f"--- {who} ---\\n" + (t["text"] if who == "ASSISTANT" else textwrap.shorten(t["text"], 500)))
+print("\\nQuestions asked per round (field ids):", rec["asked"])
+print("Facts dropped by the quote check:", [d["id"] for d in rec["dropped"]])
+a = reg["assessment"]
 print("\\n=== RESULT ===\\nBank tier:", a["bank_tier"], "| EU tier:", a["eu_tier"], "| model proposed:", a["model_proposed_tier"])
 print("risk score", a["risk"]["score"], "vs appetite", a["risk"]["threshold"], "| route:", a["approval_route"])
-for s in a["signals"]: print(f"  {s['ref']:<18} {s['tier']:<10} {s['source']:<32} \\"{s['evidence'][:90]}\\"")
+for s_ in a["signals"]: print(f"  {s_['ref']:<18} {s_['tier']:<10} {s_['source']:<32} \\"{s_['evidence'][:90]}\\"")
 print("review flags:", *a["review_flags"], sep="\\n  ")
 print("affected:", [p["category"] for p in a["affected_parties"]])
-print("open items:", len(a["open_items"]))
+print("open items:", [o["label"] for o in a["open_items"]])
 """)
 
 code("""
@@ -259,7 +247,8 @@ print(f"Representative registration: {s['calls']} model calls, {s['prompt_tokens
 
 code("""
 from engine.cards import card_markdown
-md_text = card_markdown(trace["registration"])
+reg_md = dict(trace["registration"]); reg_md.setdefault("status", "pending_committee"); reg_md.setdefault("id", rec["case_id"])
+md_text = card_markdown(reg_md)
 print(md_text[:6000])
 """)
 
@@ -275,13 +264,14 @@ code("""
 def load_summary(tag):
     p = Path(f"results/{tag}_summary.json")
     return json.loads(p.read_text()) if p.exists() else None
-b_dev, b_hold = load_summary("baseline_dev"), load_summary("baseline_holdout")
-if b_dev:
-    display(pd.DataFrame({"v1 baseline, dev": b_dev, "v1 baseline, held-out": b_hold}).loc[
-        ["n", "tier_agreement_pct", "tier_kappa", "under_tiering_rate_pct", "under_tiering_high_prohibited", "adversarial_under_tiered", "tokens_mean", "cost_total_usd"]])
-    print("Under-tiered by v1 (dev):", *b_dev["under_tiered_cases"], sep="\\n  ")
-else:
-    print("Run: python -m eval.run_eval --baseline")
+b_all = load_summary("baseline_20b_all")
+base = {}
+if b_all:
+    display(pd.Series(b_all, name="v1 baseline (gpt-oss-20b), all cases").to_frame().loc[
+        ["n", "tier_agreement_pct", "tier_kappa", "eu_tier_agreement_pct", "under_tiering_rate_pct", "under_tiering_high_prohibited", "adversarial_under_tiered", "tokens_mean", "cost_total_usd"]])
+    print("Under-tiered by v1:", *b_all["under_tiered_cases"], sep="\\n  ")
+    base = {r["case_id"]: r for r in json.loads(Path("results/baseline_20b_all_results.json").read_text())}
+    print("Calls that failed:", [(r["case_id"], r.get("error", "")[:80]) for r in base.values() if not r.get("pred")])
 """)
 
 md(NOTES.get("baseline", """
@@ -336,7 +326,7 @@ from eval.harness import score
 RUN = bool(os.environ.get("RUN_EVAL"))  # set RUN_EVAL=1 to re-run instead of loading cached results
 if RUN:
     import subprocess; subprocess.run([sys.executable, "-m", "eval.run_eval", "--all"], check=True)
-S = {t: load_summary(t) for t in ("system_120b", "system_20b", "oracle_gold", "oracle_holdout")}
+S = {t: load_summary(t) for t in ("system_120b", "system_20b", "system_combined", "oracle_gold", "oracle_holdout")}
 targets = [
     ("Tier agreement (Bank tier) %", "tier_agreement_pct", ">= 90"),
     ("Cohen's kappa (Bank tier)", "tier_kappa", "report"),
@@ -357,7 +347,7 @@ targets = [
     ("Cost per registration (USD)", "cost_per_registration_usd_mean", "report"),
 ]
 def cell(s, k): return None if not s else s.get(k)
-tbl = pd.DataFrame([{"metric": n, "Phase 1 target": t, "full system, gpt-oss-120b (6 cases)": cell(S["system_120b"], k), "full system, gpt-oss-20b (6 cases)": cell(S["system_20b"], k),
+tbl = pd.DataFrame([{"metric": n, "Phase 1 target": t, "full system, gpt-oss-120b (6 cases)": cell(S["system_120b"], k), "full system, gpt-oss-20b (6 cases)": cell(S["system_20b"], k), "full system, both (12)": cell(S["system_combined"], k),
                      "rules only (oracle), dev (63)": cell(S["oracle_gold"], k), "rules only (oracle), held-out (14)": cell(S["oracle_holdout"], k)} for n, k, t in targets])
 display(tbl)
 """)
@@ -429,7 +419,7 @@ if sys_results and os.environ.get("GROQ_API_KEY"):
         facts = {k: v["value"] for k, v in r["registration"]["fields"].items()}
         if not summ: judged[r["case_id"]] = {"unsupported": [], "supported_claims": 0, "empty": True}; continue
         try:
-            judged[r["case_id"]] = chat_json(JUDGE, f"FACTS:\\n{json.dumps(facts)}\\n\\nSUMMARY:\\n{summ}", step="judge", usage=ju, reasoning_effort="medium", max_tokens=1500)
+            judged[r["case_id"]] = chat_json(JUDGE, f"FACTS:\\n{json.dumps(facts)}\\n\\nSUMMARY:\\n{summ}", step="judge", usage=ju, model="openai/gpt-oss-20b", reasoning_effort="medium", max_tokens=1500)
         except Exception as e:
             judged[r["case_id"]] = {"error": str(e)}
     judge_file.write_text(json.dumps(judged, indent=1))
@@ -471,7 +461,7 @@ for tag in ("system_120b", "system_20b"):
 calls_df = pd.DataFrame(rows)
 if len(calls_df):
     by = calls_df.groupby(["model", "step"]).agg(calls=("step", "size"), mean_in=("prompt_tokens", "mean"), mean_out=("completion_tokens", "mean"),
-                                      mean_reasoning=("reasoning_tokens", "mean"), mean_latency_s=("latency_s", "mean"), total_cost_usd=("cost_usd", "sum")).round(1)
+                                      mean_reasoning=("reasoning_tokens", "mean"), mean_latency_s=("latency_s", "mean"), total_cost_usd=("cost_usd", "sum")).round({"mean_in": 0, "mean_out": 0, "mean_reasoning": 0, "mean_latency_s": 2, "total_cost_usd": 5})
     display(by)
     s = S["system_120b"]
     per = s["cost_per_registration_usd_mean"]
@@ -495,7 +485,7 @@ Built against the same `engine` package used in this notebook. Without installin
 code("""
 import httpx
 APP_URL = os.environ.get("APP_URL") or json.loads(Path("notebooks/meta.json").read_text()).get("app_url") if Path("notebooks/meta.json").exists() else None
-if APP_URL:
+if APP_URL and APP_URL.startswith("http"):
     try:
         h = httpx.get(APP_URL.rstrip("/") + "/api/health", timeout=20).json(); print("health:", h)
         inv = httpx.get(APP_URL.rstrip("/") + "/api/inventory", timeout=20).json(); print("inventory records:", len(inv["items"]))

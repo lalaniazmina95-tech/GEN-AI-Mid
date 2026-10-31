@@ -33,6 +33,8 @@ from .prompts import AFFECTED_TAXONOMY, ASK_SYSTEM, EXTRACT_SYSTEM, SCREEN_SYSTE
 from .rules import derive_flags, floor_signals, floor_tier, max_tier, risk_score
 from .verify import norm, quote_supported
 
+NEGATIVE = re.compile(r"^\s*(?:\d+\.\s*)?(?:no[,.]|none\b|no (?:human|one|explanation|reasons?|formal)\b|not (?:yet )?(?:done|tested|performed|assessed|checked|defined|measured|decided)\b)"
+                      r"|\b(?:have not|haven't|has not) (?:done|tested|checked|performed|assessed|measured)\b", re.I)
 FINISH_WORDS = re.compile(r"^\s*(finish|done|that'?s all|generate( the)? (assessment|cards)?|assess( now)?|submit)\s*[.!]?\s*$", re.I)
 DISCLOSURE = ("Hello. I am an AI assistant (an AI system, not a person) that helps teams register AI use cases for the AI governance office. "
               "Paste your use case brief: what the system does, who uses it, who it affects, what data it uses and how it was tested. "
@@ -98,7 +100,12 @@ class Agent:
             rec = {"value": val, "quote": quote, "turn": len(state["turns"]) - 1, "source": "team"}
             if f["kind"] == "control":
                 st = item.get("status") or "done"
-                rec["status"] = st if st in ("done", "planned", "partial", "not_done") else "done"
+                st = st if st in ("done", "planned", "partial", "not_done") else "done"
+                # A negative answer can never be recorded as a control in place (found on P2-A, gpt-oss-20b:
+                # "No, we have not done that yet" was labelled done and the card showed the control as present).
+                if st in ("done", "partial") and NEGATIVE.search(f"{val} {quote}"):
+                    st = "not_done"
+                rec["status"] = st
             state["fields"][fid] = rec
             kept.append(fid)
         for fid in out.get("unknown", []) or []:

@@ -131,5 +131,17 @@
    "gold": "high"
   },
   "finding": "The model read 'may call the police' in a branch face-recognition brief as Art. 5(1)(h). That article covers real-time remote biometric identification for law enforcement, which a bank is not. Verified by re-scoring the recorded screening output (no new model call, to save the free-tier allowance); the table in section 6 shows the as-run result. Also seen on X11-S: the model built 'human oversight: done' from a monitoring sentence although the team said no review happens before a freeze. Not fixed; reported in the honesty section."
+ },
+ {
+  "iteration": "R4",
+  "when": "2026-10-31",
+  "set": "full system, real model (gpt-oss-20b)",
+  "change": "Deterministic check: a control whose value or quote is a negative answer ('No', 'have not', 'not yet done'...) is recorded as not_done whatever status the model gives.",
+  "metrics": {
+   "case": "P2-A",
+   "fabrications_as_run": 1,
+   "after_fix_rescored_from_recorded_extraction": 0
+  },
+  "finding": "gpt-oss-20b extracted 'No, we have not done that yet' for data bias checks but set status 'done', so the model card showed a control the team does not have: the exact card-fabrication failure Phase 1 row 7a targets. Also: gpt-oss-20b flagged an internal coding assistant as customer-facing (M1-S over-tiered to limited), and two baseline calls failed with Groq 'failed to generate JSON' (L7-S, L8-S), so the baseline n is 75."
  }
 ]

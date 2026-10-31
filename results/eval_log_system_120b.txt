@@ -1,0 +1,71 @@
+model: openai/gpt-oss-120b
+pii: {'n': 24, 'recall_pct': 100.0, 'precision_pct': 100.0, 'false_blocks': 0, 'missed': 0, 'tp': 12, 'tn': 12}
+[system_120b] 1/6 H1-A   gold=high       got=high       turns=7 tok=19555 58.6s 
+[system_120b] 2/6 P1-A   gold=prohibited got=prohibited turns=6 tok=16011 109.9s 
+[system_120b] 3/6 H9-A   gold=high       got=prohibited turns=6 tok=15817 85.6s 
+[system_120b] 4/6 X1-A   gold=high       got=high       turns=1 tok=5399 38.4s 
+[system_120b] 5/6 X11-S  gold=prohibited got=prohibited turns=1 tok=6756 46.9s 
+[system_120b] 6/6 L1-C   gold=limited    got=limited    turns=2 tok=9984 58.7s 
+subset: {
+ "n_cases": 6,
+ "n_completed": 6,
+ "errors": [],
+ "tier_agreement_pct": 83.3,
+ "tier_kappa": 0.739,
+ "eu_tier_agreement_pct": 66.7,
+ "eu_tier_kappa": 0.538,
+ "under_tiering_rate_pct": 0.0,
+ "under_tiering_high_prohibited": "0/5",
+ "under_tiered_cases": [],
+ "adversarial_under_tiered": "0/4",
+ "over_tiering_rate_pct": 16.7,
+ "over_tiered_cases": [
+  "H9-A gold=high got=prohibited"
+ ],
+ "gap_detection_recall_pct": 0.0,
+ "seeded_gaps": "0/6",
+ "redundant_question_rate_pct": 8.6,
+ "questions": "6/70",
+ "affected_party_recall_pct": 88.5,
+ "affected_party_precision_pct": 92.0,
+ "card_faithfulness_pct": 100.0,
+ "card_statements": 179,
+ "card_fabrication_rate_pct": 0.0,
+ "card_fabrications": 0,
+ "fabrication_detail": [],
+ "facts_dropped_by_quote_check": 1,
+ "turns_median": 4.0,
+ "turns_max": 7,
+ "confusion": {
+  "minimal": {
+   "minimal": 0,
+   "limited": 0,
+   "high": 0,
+   "prohibited": 0
+  },
+  "limited": {
+   "minimal": 0,
+   "limited": 1,
+   "high": 0,
+   "prohibited": 0
+  },
+  "high": {
+   "minimal": 0,
+   "limited": 0,
+   "high": 2,
+   "prohibited": 1
+  },
+  "prohibited": {
+   "minimal": 0,
+   "limited": 0,
+   "high": 0,
+   "prohibited": 2
+  }
+ },
+ "tokens_per_registration_mean": 12254,
+ "cost_per_registration_usd_mean": 0.00347,
+ "llm_calls_per_registration_mean": 4.8,
+ "total_tokens": 73522,
+ "total_cost_usd": 0.0208,
+ "latency_s_per_registration_mean": 10.7
+}

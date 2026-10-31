@@ -1,0 +1,81 @@
+{
+ "columns": [
+  "Phase 1 target",
+  "Full system, 12 real-model registrations",
+  "v1 baseline (75)",
+  "Rules only, held-out (14)"
+ ],
+ "rows": [
+  [
+   "Tier agreement",
+   ">= 90%",
+   "75% (kappa 0.64)",
+   "48% (kappa 0.22)",
+   "71%"
+  ],
+  [
+   "Under-tiering of high/prohibited",
+   "0",
+   "0 of 8",
+   "15 of 36",
+   "1 of 7"
+  ],
+  [
+   "Understated (adversarial) briefs under-tiered",
+   "0",
+   "0 of 7",
+   "5 of 9",
+   "-"
+  ],
+  [
+   "Gap detection recall",
+   ">= 95%",
+   "60%",
+   "-",
+   "-"
+  ],
+  [
+   "Redundant questions",
+   "<= 5%",
+   "12.6%",
+   "-",
+   "-"
+  ],
+  [
+   "Affected-party recall",
+   ">= 90%",
+   "93.8%",
+   "-",
+   "-"
+  ],
+  [
+   "Card faithfulness",
+   "100%",
+   "100% (422 statements)",
+   "-",
+   "-"
+  ],
+  [
+   "Card fabrication",
+   "0",
+   "1 (0 after fix)",
+   "-",
+   "-"
+  ],
+  [
+   "Median turns",
+   "<= 10",
+   "6",
+   "1",
+   "-"
+  ],
+  [
+   "Cost per registration (gpt-oss-120b)",
+   "report",
+   "$0.0042 (15.2k tokens)",
+   "$0.0002",
+   "$0"
+  ]
+ ],
+ "note": "12 registrations is a small sample (Groq free tier). See the notebook for every case, the failures found and what was changed."
+}

@@ -1,0 +1,59 @@
+{
+ "H1-A": {
+  "unsupported": [],
+  "supported_claims": 3
+ },
+ "P1-A": {
+  "unsupported": [],
+  "supported_claims": 2
+ },
+ "H9-A": {
+  "unsupported": [
+   "matches faces 1:N against a watchlist",
+   "issuing real\u2011time alerts"
+  ],
+  "supported_claims": 8
+ },
+ "X1-A": {
+  "unsupported": [],
+  "supported_claims": 5
+ },
+ "X11-S": {
+  "unsupported": [],
+  "supported_claims": 5
+ },
+ "L1-C": {
+  "unsupported": [],
+  "supported_claims": 6
+ },
+ "H5-A": {
+  "unsupported": [],
+  "supported_claims": 4
+ },
+ "P2-A": {
+  "unsupported": [
+   "TrustLens is a vendor\u2011provided machine learning model that analyzes public social media posts, follower networks, app usage behaviour and contact lists to generate a score for each digital customer and applicant."
+  ],
+  "supported_claims": 2
+ },
+ "H2-A": {
+  "unsupported": [],
+  "supported_claims": 6
+ },
+ "M1-S": {
+  "unsupported": [
+   "does not retain code"
+  ],
+  "supported_claims": 3
+ },
+ "X8-S": {
+  "unsupported": [
+   "It processes client contact names and does not handle biometric or personal data beyond names."
+  ],
+  "supported_claims": 2
+ },
+ "X14-S": {
+  "unsupported": [],
+  "supported_claims": 3
+ }
+}
