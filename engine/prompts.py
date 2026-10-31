@@ -16,7 +16,7 @@ import json
 from .kb import eu_ai_act as eu
 from .kb.schema import FIELDS
 
-PROMPT_VERSION = "v3"
+PROMPT_VERSION = "v4"
 
 AFFECTED_TAXONOMY = {
     "retail_customers": "Existing retail (individual) customers",
@@ -56,7 +56,7 @@ Rules:
 3. For control fields (oversight, testing, monitoring, logging, notices, due diligence, impact assessment, data checks, safeguards, appeal), also give "status": "done" (exists now), "planned" (intended, not yet done), "partial", or "not_done" (the team says it does not exist). "We will test for bias" is planned, not done.
 4. Classify by what the system does, not by how the team describes it. A model that scores applicants for financing is about credit decisions even if called an "assistant" or "helper"; if officers "almost always follow" its output it materially shapes the decision.
 5. enum and bool fields must use the allowed values. For personal_data choose the most sensitive category that applies.
-6. If the team explicitly says they do not know something, put the field id in "unknown".
+6. "unknown" is ONLY for fields the team was just asked about and explicitly answered that they do not know. Never list fields merely because the message does not mention them.
 7. Corrections: if the new message corrects an earlier fact, extract the corrected value.
 
 Return JSON only:

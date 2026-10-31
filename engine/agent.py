@@ -102,7 +102,10 @@ class Agent:
             state["fields"][fid] = rec
             kept.append(fid)
         for fid in out.get("unknown", []) or []:
-            if fid in FIELD_BY_ID and fid not in state["fields"] and fid not in state["unknown"]:
+            # Only a reply to a question can say "we don't know". Without this check the model
+            # marked every field the brief did not mention as unknown, and nothing got asked
+            # (failure found on held-out case X1-A, gpt-oss-120b).
+            if fid in just_asked and fid in FIELD_BY_ID and fid not in state["fields"] and fid not in state["unknown"]:
                 state["unknown"].append(fid)
         state["dropped"].extend(dropped)
         return {"kept": kept, "dropped": dropped}

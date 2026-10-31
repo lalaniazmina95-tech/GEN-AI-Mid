@@ -1,17 +1,122 @@
 [
- {"iteration": "D1", "when": "2026-10-31", "set": "dev (63), oracle extraction", "change": "First end-to-end run of rules + gap logic with perfect extraction",
-  "metrics": {"tier_agreement_pct": 81.0, "redundant_question_rate_pct": 29.3, "facts_dropped_by_quote_check": 344, "under_tiered": ["L7-C", "L7-S"], "over_tiered": ["H11-S", "H11-A", "L1-C", "L1-S", "L2-S", "L6-C", "L6-S", "L10-S", "M8-C", "M8-S"]},
-  "finding": "344 facts dropped: short answers such as 'No.' fail the quote check (too short to verify) and get re-asked, inflating redundant questions. Over-tiering: chatbots that 'answer on their own' fired the Bank rule for acting on customers without review; customer-call emotion detection fired the workplace prohibition because the text mentioned 'agents'."},
- {"iteration": "D2", "when": "2026-10-31", "set": "dev (63), oracle extraction", "change": "Accept short quotes only when they answer the question just asked about that field; restrict the acts-without-review rule to decision domains or explicit block/decline wording; workplace emotion recognition requires employment domain or emotion-of-staff wording",
-  "metrics": {"tier_agreement_pct": 90.5, "redundant_question_rate_pct": 48.1, "facts_dropped_by_quote_check": 0, "under_tiered": ["L10-S"], "over_tiered": ["L1-C", "L1-S", "L2-S", "L6-C", "L6-S"]},
-  "finding": "Drops fixed. Redundancy rose because the synthetic briefs contained bare 'No.' sentences that are meaningless out of context (a data problem, not a system problem). The acts-without-review regex still matched 'answers ... without human review'."},
- {"iteration": "D3", "when": "2026-10-31", "set": "dev (63), oracle extraction", "change": "Rewrite bare yes/no facts as self-contained sentences in the generator; acts-without-review regex requires an action verb (block, decline, restrict, approve...); customer-facing detection reads the team's quote, not only the boolean",
-  "metrics": {"tier_agreement_pct": 95.2, "redundant_question_rate_pct": 8.5, "under_tiered": [], "over_tiered": ["L2-S", "L6-C", "L6-S"]},
-  "finding": "'Personal financial data' matched the credit pattern 'personal financ...' so a voice bot and a savings chatbot became high risk."},
- {"iteration": "D4", "when": "2026-10-31", "set": "dev (63), oracle extraction", "change": "Credit pattern tightened to 'personal loan/financing'. Rules frozen (git commit 2fc5493).",
-  "metrics": {"tier_agreement_pct": 100.0, "redundant_question_rate_pct": 8.8, "under_tiered": [], "over_tiered": []},
-  "finding": "100% on the cases the rules were tuned on is not evidence of generalisation. A held-out set of 14 new cases was written after the freeze."},
- {"iteration": "H1", "when": "2026-10-31", "set": "held-out (14), oracle extraction", "change": "None (frozen rules)",
-  "metrics": {"tier_agreement_pct": 71.4, "under_tiered": ["X8-S", "X11-S"], "over_tiered": ["X6-C", "X14-S"]},
-  "finding": "Overfitting confirmed: 100% -> 71% on unseen wording. X6: 'digitally manipulated video' (deepfake detection) fired Art. 5(1)(a) manipulation. X11: 'people recruited as mules' fired the employment rule. X14: a document checklist on 'personal financing applications' fired credit scoring. X8 and X11 need model screening (external content; Bank prohibited use), which the oracle does not do. Not fixed: reported as a known limitation so the held-out numbers stay honest."}
+ {
+  "iteration": "D1",
+  "when": "2026-10-31",
+  "set": "dev (63), oracle extraction",
+  "change": "First end-to-end run of rules + gap logic with perfect extraction",
+  "metrics": {
+   "tier_agreement_pct": 81.0,
+   "redundant_question_rate_pct": 29.3,
+   "facts_dropped_by_quote_check": 344,
+   "under_tiered": [
+    "L7-C",
+    "L7-S"
+   ],
+   "over_tiered": [
+    "H11-S",
+    "H11-A",
+    "L1-C",
+    "L1-S",
+    "L2-S",
+    "L6-C",
+    "L6-S",
+    "L10-S",
+    "M8-C",
+    "M8-S"
+   ]
+  },
+  "finding": "344 facts dropped: short answers such as 'No.' fail the quote check (too short to verify) and get re-asked, inflating redundant questions. Over-tiering: chatbots that 'answer on their own' fired the Bank rule for acting on customers without review; customer-call emotion detection fired the workplace prohibition because the text mentioned 'agents'."
+ },
+ {
+  "iteration": "D2",
+  "when": "2026-10-31",
+  "set": "dev (63), oracle extraction",
+  "change": "Accept short quotes only when they answer the question just asked about that field; restrict the acts-without-review rule to decision domains or explicit block/decline wording; workplace emotion recognition requires employment domain or emotion-of-staff wording",
+  "metrics": {
+   "tier_agreement_pct": 90.5,
+   "redundant_question_rate_pct": 48.1,
+   "facts_dropped_by_quote_check": 0,
+   "under_tiered": [
+    "L10-S"
+   ],
+   "over_tiered": [
+    "L1-C",
+    "L1-S",
+    "L2-S",
+    "L6-C",
+    "L6-S"
+   ]
+  },
+  "finding": "Drops fixed. Redundancy rose because the synthetic briefs contained bare 'No.' sentences that are meaningless out of context (a data problem, not a system problem). The acts-without-review regex still matched 'answers ... without human review'."
+ },
+ {
+  "iteration": "D3",
+  "when": "2026-10-31",
+  "set": "dev (63), oracle extraction",
+  "change": "Rewrite bare yes/no facts as self-contained sentences in the generator; acts-without-review regex requires an action verb (block, decline, restrict, approve...); customer-facing detection reads the team's quote, not only the boolean",
+  "metrics": {
+   "tier_agreement_pct": 95.2,
+   "redundant_question_rate_pct": 8.5,
+   "under_tiered": [],
+   "over_tiered": [
+    "L2-S",
+    "L6-C",
+    "L6-S"
+   ]
+  },
+  "finding": "'Personal financial data' matched the credit pattern 'personal financ...' so a voice bot and a savings chatbot became high risk."
+ },
+ {
+  "iteration": "D4",
+  "when": "2026-10-31",
+  "set": "dev (63), oracle extraction",
+  "change": "Credit pattern tightened to 'personal loan/financing'. Rules frozen (git commit 2fc5493).",
+  "metrics": {
+   "tier_agreement_pct": 100.0,
+   "redundant_question_rate_pct": 8.8,
+   "under_tiered": [],
+   "over_tiered": []
+  },
+  "finding": "100% on the cases the rules were tuned on is not evidence of generalisation. A held-out set of 14 new cases was written after the freeze."
+ },
+ {
+  "iteration": "H1",
+  "when": "2026-10-31",
+  "set": "held-out (14), oracle extraction",
+  "change": "None (frozen rules)",
+  "metrics": {
+   "tier_agreement_pct": 71.4,
+   "under_tiered": [
+    "X8-S",
+    "X11-S"
+   ],
+   "over_tiered": [
+    "X6-C",
+    "X14-S"
+   ]
+  },
+  "finding": "Overfitting confirmed: 100% -> 71% on unseen wording. X6: 'digitally manipulated video' (deepfake detection) fired Art. 5(1)(a) manipulation. X11: 'people recruited as mules' fired the employment rule. X14: a document checklist on 'personal financing applications' fired credit scoring. X8 and X11 need model screening (external content; Bank prohibited use), which the oracle does not do. Not fixed: reported as a known limitation so the held-out numbers stay honest."
+ },
+ {
+  "iteration": "R1",
+  "when": "2026-10-31",
+  "set": "full system, real model (gpt-oss-120b)",
+  "change": "None yet: first real-model subset run",
+  "metrics": {
+   "case": "X1-A (held-out, adversarial)",
+   "turns": 1,
+   "questions_asked": 0,
+   "open_items": 25,
+   "tier": "high (correct)"
+  },
+  "finding": "The model listed every field the brief did not mention under 'unknown' (meant for 'the team says it does not know'). The gap logic treated those as settled, so the chatbot asked nothing and produced a registration with 25 open items. The tier was right only because the hard credit rule fired on the brief. This failure could not appear with the oracle, which never returns 'unknown'."
+ },
+ {
+  "iteration": "R2",
+  "when": "2026-10-31",
+  "set": "full system, real model",
+  "change": "'unknown' is accepted only for fields asked in the previous question round; extraction prompt rule 6 rewritten (prompt v4). Affected cases re-run with the fix; the before-fix record is kept in results/failures/.",
+  "metrics": {},
+  "finding": "See section 6 for the re-run."
+ }
 ]
